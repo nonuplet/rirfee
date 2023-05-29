@@ -96,7 +96,9 @@ onUnmounted(() => {
       </transition>
       <transition name="right">
         <div v-show="isHeaderVisible" class="hamburger" @click="hamburgerToggle()">
-          <font-awesome-icon :icon="['fas', 'bars']" size="lg" />
+          <div class="hamburger-icon" :class="{ active: isMenuOpen }">
+            <div></div>
+          </div>
         </div>
       </transition>
       <transition name="right" @after-enter="onFirstTransition" @after-leave="onFirstTransition">
@@ -148,9 +150,18 @@ onUnmounted(() => {
       @apply ml-auto flex items-center bg-white drop-shadow-xl pl-6 pr-4 py-1 rounded-l-full
       @apply md:hidden
 
-      .icon
-        @apply w-10
-        @apply md:w-16
+      .hamburger-icon
+        &:before, &:after, div
+          @apply bg-primary block w-[20px] h-[3px] rounded-xl duration-500
+          margin: 5px 0
+          content: ""
+
+        &.active:before
+          transform: translateY(8px) rotate(135deg) scale(1.2)
+        &.active:after
+          transform: translateY(-8px) rotate(-135deg) scale(1.2)
+        &.active div
+          transform: scale(0)
 
     .right
       @apply ml-auto items-center justify-end leading-none bg-white drop-shadow-xl font-inter font-black text-2xl
