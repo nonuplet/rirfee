@@ -1,4 +1,5 @@
 /** @type {import("tailwindcss").Config} */
+const { apply } = require('postcss')
 module.exports = {
   content: ['./resources/**/*.blade.php', './resources/**/*.ts'],
   theme: {

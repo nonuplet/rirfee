@@ -1,52 +1,60 @@
+<script setup lang="ts">
+import { nextTick, onMounted } from 'vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCircleDown } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faCircleDown)
+
+onMounted(() => {
+  nextTick(() => {
+    document.getElementById('eye-catch-logo').classList.add('animate')
+  })
+})
+</script>
+
 <template>
   <section id="eye-catch">
-    <img class="eye-catch-img" src="/img/index/eye-catch.png" />
-    <img class="logo-icon" src="/img/logo/rirfee_logo.svg" />
-    <!--    <div class="scroll-block">-->
-    <!--      <font-awesome-icon-->
-    <!--        class="scroll-icon"-->
-    <!--        icon="fa-solid fa-circle-arrow-down"-->
-    <!--      />-->
-    <!--      <p class="scroll-text">-->
-    <!--        Scroll-->
-    <!--      </p>-->
-    <!--    </div>-->
+    <img class="eye-catch-img" src="/img/index/eye-catch.png" alt="eye-catch-img" />
+    <img id="eye-catch-logo" src="/img/logo/rirfee_logo.svg" alt="logo" />
+    <a id="eye-catch-scroll" href="#about">
+      <div class="scroll-inner">
+        <font-awesome-icon class="bottom-arrow" :icon="['fas', 'circle-down']" size="2xl" />
+        <span class="scroll-text">Scroll</span>
+      </div>
+    </a>
   </section>
 </template>
 
-<script>
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircleArrowDown } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faCircleArrowDown)
-export default {
-  name: 'EyeCatch',
-}
-</script>
-
 <style lang="sass" scoped>
 #eye-catch
-  @apply w-screen h-screen relative overflow-hidden
+  @apply w-full h-screen relative overflow-hidden bg-black
 
 .eye-catch-img
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 65% 100%, 0% 85%)
-  object-position: 20% 0%
-  @apply object-cover w-full h-full
+  @apply object-cover opacity-60 w-full h-full
+  object-position: 20% 0
 
-.logo-icon
-  @apply absolute w-[40%] bottom-[10%] right-[10%]
-  @apply lg:top-[50%] lg:right-[10%] lg:translate-y-[-50%] lg:rotate-6
+#eye-catch-logo
+  @apply absolute transition-all ease-in-out duration-[3s] opacity-0
+  @apply w-[clamp(1rem,60%,20rem)] top-[20%] max-md:left-[50%] translate-y-32 max-md:-translate-x-1/2
+  @apply md:w-[30%] md:top-[50%] md:right-[10%] md:-rotate-6
 
-.scroll-block
-  @apply absolute bottom-3 left-3 w-1/2 h-[6%]
-  @apply sm:bottom-5 sm:left-5 md:bottom-7 md:left-7
+  &.animate
+    @apply translate-y-0 opacity-100 md:rotate-6
 
-.scroll-icon
-  @apply inline h-full animate-bounce
+#eye-catch-scroll
+  @apply absolute block w-full h-fit bottom-4
 
-.scroll-text
-  @apply inline text-2xl font-bold ml-1 align-[6px]
 
-.scroll-text-temp
-  @apply inline text-sm font-bold ml-1 align-[6px]
+  .scroll-inner
+    @apply flex items-center bg-primary rounded-full bg-clip-border drop-shadow-md animate-bounce w-[min(50%,250px)] mx-auto
+    @apply px-2 py-2
+    @apply md:px-10
+
+    .bottom-arrow
+      @apply text-white
+
+    .scroll-text
+      @apply block grow text-center text-white font-inter font-black
+      @apply text-xl
+      @apply md:text-2xl
 </style>
