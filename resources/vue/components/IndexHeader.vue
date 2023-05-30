@@ -97,7 +97,7 @@ onUnmounted(() => {
       <transition name="right">
         <div v-show="isHeaderVisible" class="hamburger" @click="hamburgerToggle()">
           <div class="hamburger-icon" :class="{ active: isMenuOpen }">
-            <div></div>
+            <div />
           </div>
         </div>
       </transition>
@@ -158,8 +158,10 @@ onUnmounted(() => {
 
         &.active:before
           transform: translateY(8px) rotate(135deg) scale(1.2)
+
         &.active:after
           transform: translateY(-8px) rotate(-135deg) scale(1.2)
+
         &.active div
           transform: scale(0)
 

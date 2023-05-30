@@ -1,32 +1,26 @@
 <template>
   <section id="eye-catch">
-    <img
-      class="eye-catch-img"
-      src="/img/index/eye-catch.png"
-    />
-    <img
-      class="logo-icon"
-      src="/img/logo/rirfee_logo.svg"
-    />
-<!--    <div class="scroll-block">-->
-<!--      <font-awesome-icon-->
-<!--        class="scroll-icon"-->
-<!--        icon="fa-solid fa-circle-arrow-down"-->
-<!--      />-->
-<!--      <p class="scroll-text">-->
-<!--        Scroll-->
-<!--      </p>-->
-<!--    </div>-->
+    <img class="eye-catch-img" src="/img/index/eye-catch.png" />
+    <img class="logo-icon" src="/img/logo/rirfee_logo.svg" />
+    <!--    <div class="scroll-block">-->
+    <!--      <font-awesome-icon-->
+    <!--        class="scroll-icon"-->
+    <!--        icon="fa-solid fa-circle-arrow-down"-->
+    <!--      />-->
+    <!--      <p class="scroll-text">-->
+    <!--        Scroll-->
+    <!--      </p>-->
+    <!--    </div>-->
   </section>
 </template>
 
 <script>
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {faCircleArrowDown} from "@fortawesome/free-solid-svg-icons";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCircleArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faCircleArrowDown)
 export default {
-  name: "EyeCatch"
+  name: 'EyeCatch',
 }
 </script>
 
@@ -55,5 +49,4 @@ export default {
 
 .scroll-text-temp
   @apply inline text-sm font-bold ml-1 align-[6px]
-
 </style>
