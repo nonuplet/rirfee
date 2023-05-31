@@ -12,7 +12,6 @@ export const useBrowserStore = defineStore('browser', {
   }),
   actions: {
     onResize() {
-      console.log('on fire')
       const w = window.innerWidth
       if (w === this.width) return
       this.width = w

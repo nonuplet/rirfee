@@ -8,11 +8,11 @@ import { onMounted, onUnmounted } from 'vue'
 const browser = useBrowserStore()
 
 onMounted(() => {
-  document.addEventListener('resize', browser.onResize)
+  window.addEventListener('resize', browser.onResize)
 })
 
 onUnmounted(() => {
-  document.removeEventListener('resize', browser.onResize)
+  window.removeEventListener('resize', browser.onResize)
 })
 </script>
 
