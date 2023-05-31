@@ -1,6 +1,9 @@
 import { createApp } from 'vue/dist/vue.esm-bundler'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import IndexPage from '../vue/pages/IndexPage.vue'
+import { createPinia } from 'pinia'
+
+const pinia = createPinia()
 
 createApp({
   components: {
@@ -8,4 +11,5 @@ createApp({
   },
 })
   .component('font-awesome-icon', FontAwesomeIcon)
+  .use(pinia)
   .mount('#app')
