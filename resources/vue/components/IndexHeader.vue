@@ -2,14 +2,14 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faSquarePen } from '@fortawesome/free-solid-svg-icons'
-import {onMounted, onUnmounted, ref, watch} from 'vue'
-import {useBrowserStore} from "../../ts/stores/BrowserStore";
-import {storeToRefs} from "pinia";
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { useBrowserStore } from '../../ts/stores/BrowserStore'
+import { storeToRefs } from 'pinia'
 
 library.add(faBars, faTwitter, faGithub, faSquarePen)
 
 const browser = useBrowserStore()
-const {width: screenWidth} = storeToRefs(browser)
+const { width: screenWidth } = storeToRefs(browser)
 
 const isMenuOpen = ref(false)
 
@@ -26,7 +26,6 @@ watch(screenWidth, () => {
   isMenuOpen.value = false
   changedScreenWidth.value = true
 })
-
 
 const hamburgerToggle = () => {
   isMenuOpen.value = !isMenuOpen.value
