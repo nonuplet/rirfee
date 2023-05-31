@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "php artisan serve & vite",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint --fix resources/**/*.{ts,vue} && eslint --fix resources/**/*.{ts,vue}",
     "format": "prettier -w resources/**/*.{ts,vue} && prettier -w resources/**/*.{ts,vue}",
