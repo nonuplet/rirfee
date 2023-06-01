@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import anime from 'animejs/lib/anime.es'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { AppearEvent } from '../../ts/utils/AppearEvent'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUnity } from '@fortawesome/free-brands-svg-icons'
+import { Skill, Skills } from '../../ts/entities/Skill'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faUnity)
 
 const appearedBgText = () => {
   const timeline = anime.timeline()
@@ -17,6 +23,13 @@ const appearedBgText = () => {
     loop: false,
   })
 }
+
+const onClickIcon = (skill: Skill) => {
+  skill.isOpen = !skill.isOpen
+}
+
+const skills = ref(Skills)
+skills.value.forEach((skill) => (skill.isOpen = false))
 
 onMounted(() => {
   const bgText = document.getElementById('about-background-text')
@@ -51,18 +64,122 @@ onMounted(() => {
         />
       </svg>
     </div>
+    <div class="about-contents">
+      <div class="about-picture">
+        <img class="about-picture-img" src="img/index/about.png" alt="about-img" />
+        <div class="about-picture-bg"></div>
+      </div>
+      <div class="about-title-mobile">
+        <h2>自己紹介</h2>
+      </div>
+      <div class="about-container">
+        <div class="about-title-desktop">
+          <h2>自己紹介</h2>
+        </div>
+        <p class="about-description">
+          Nonuplet (ノナ) です。主にプログラマー。<br />
+          Unityを使ったソフトウェア開発や、Webのフロントエンドを中心に開発を行っています。<br />
+          その他のスキルとしては、デザイン系や、DTMやDJなど割と幅広くやってます。
+        </p>
+        <div class="about-skills">
+          <div class="skills-title">SKILLS</div>
+          <div class="skills-box">
+            <div
+              v-for="skill of skills"
+              :key="skill.title"
+              class="skill"
+              :class="{ open: skill.isOpen }"
+              @click="onClickIcon(skill)"
+            >
+              <font-awesome-icon v-if="skill.faIcon !== undefined" :icon="skill.faIcon" class="skill-icon" />
+              <div class="skill-info" :class="{ open: skill.isOpen }">
+                <span class="skill-title">{{ skill.title }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 <style scoped lang="sass">
 #about
-  @apply relative w-full mt-20
+  @apply relative w-full overflow-x-hidden
+  @apply mt-10
+  @apply md:mt-20
 
-#about-background-text
-  @apply absolute top-0 -right-20 h-fit w-5/6
-  svg
-    .cls-1
-      @apply fill-[rgba(0,0,0,0)] stroke-[2px] stroke-[#D9D9D9]
-      stroke-linejoin: round
-      stroke-linecap: round
+  #about-background-text
+    @apply absolute top-0 h-fit -z-10
+    @apply w-full -right-8
+    @apply md:w-5/6 md:-right-20
+
+    svg
+      .cls-1
+        @apply fill-[rgba(0,0,0,0)] stroke-[#D9D9D9]
+        @apply stroke-[4px]
+        @apply md:stroke-[2px]
+        stroke-linejoin: round
+        stroke-linecap: round
+
+  .about-contents
+    @apply flex flex-wrap items-end
+    @apply px-3 my-10
+    @apply md:px-20 md:my-20 mx-auto max-w-[1400px]
+
+    .about-picture
+      @apply relative w-[40%] overflow-visible
+      @apply h-[27vh]
+      @apply md:h-[500px] xl:w-[30%]
+
+      .about-picture-img
+        @apply object-cover w-full h-full
+        clip-path: polygon(0% 10%, 0% 100%, 100% 90%, 100% 0%)
+
+      .about-picture-bg
+        @apply absolute w-full h-full bg-[#7D7D7D] top-[5%] left-[5%] -z-10
+        clip-path: polygon(0% 10%, 0% 100%, 100% 90%, 100% 0%)
+
+    .about-title-mobile
+      @apply md:hidden text-center w-[60%] font-mplus font-black text-[1.8rem] mb-10
+
+    .about-container
+      @apply font-mplus w-full
+      @apply max-md:px-3 max-md:mt-5 text-sm
+      @apply md:w-[60%] md:pl-12 md:text-base xl:ml-auto
+
+      .about-title-desktop
+        @apply max-md:hidden flex items-center w-full font-black text-[2.5rem] border-l-[10px] pb-2 mb-10
+
+        h2
+          @apply pl-8 leading-none
+
+      .about-description
+        @apply md:pl-12 lg:text-lg
+
+      .about-skills
+        @apply w-full mt-2
+        @apply md:pl-12 md:mt-5
+
+        .skills-title
+          @apply w-full text-right font-inter font-black text-xl text-gray
+
+        .skills-box
+          @apply border-2 rounded-xl border-gray px-5 py-2
+
+          .skill
+            @apply inline-flex w-[24px] transition-all duration-500 overflow-hidden
+            &.open
+              @apply w-full
+
+            .skill-icon
+              @apply text-[24px] min-w-[24px]
+
+            .skill-info
+              @apply w-0 ml-2 transition-all duration-500 bg-gray rounded-md px-2 overflow-hidden
+              &.open
+                @apply w-full
+
+              .skill-title
+                @apply font-inter font-black
 </style>
