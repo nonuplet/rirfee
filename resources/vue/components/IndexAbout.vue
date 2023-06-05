@@ -9,19 +9,41 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faUnity, faHtml5, faCss3, faLinux)
 
-const appearedBgText = () => {
+const appearedAnimation = () => {
   const timeline = anime.timeline()
   timeline.add({
     targets: '#about-background-text svg .cls-1',
     strokeDashoffset: [anime.setDashoffset, 0],
     easing: 'easeInOutSine',
-    duration: 1500,
-    delay: function (el, i) {
-      return i * 250
-    },
+    duration: 3000,
     direction: 'normal',
     loop: false,
   })
+  timeline.add(
+    {
+      targets: '#about-picture-img',
+      translateX: ['20px', 0],
+      translateY: ['20px', 0],
+      easing: 'easeInOutSine',
+      duration: 2000,
+      direction: 'normal',
+      loop: false,
+    },
+    100
+  )
+  timeline.add(
+    {
+      targets: '#about-title-desktop, #about-title-mobile, .about-description, .about-skills',
+      opacity: [0, '100%'],
+      translateY: ['50px', 0],
+      easing: 'easeInOutSine',
+      duration: 1000,
+      delay: anime.stagger(300),
+      direction: 'normal',
+      loop: false,
+    },
+    500
+  )
 }
 
 const skills = ref(Skills)
@@ -108,7 +130,7 @@ const closeInfoAnimation = async () => {
 onMounted(() => {
   const bgText = document.getElementById('about-background-text')
   const bgTextIntersection = new AppearEvent(bgText)
-  bgTextIntersection.addAppearEvent(appearedBgText)
+  bgTextIntersection.addAppearEvent(appearedAnimation)
 })
 </script>
 
@@ -140,14 +162,14 @@ onMounted(() => {
     </div>
     <div class="about-contents">
       <div class="about-picture">
-        <img class="about-picture-img" src="img/index/about.png" alt="about-img" />
+        <img id="about-picture-img" src="img/index/about.png" alt="about-img" />
         <div class="about-picture-bg"></div>
       </div>
-      <div class="about-title-mobile">
+      <div id="about-title-mobile">
         <h2>自己紹介</h2>
       </div>
       <div class="about-container">
-        <div class="about-title-desktop">
+        <div id="about-title-desktop">
           <h2>自己紹介</h2>
         </div>
         <p class="about-description">
@@ -218,24 +240,26 @@ onMounted(() => {
         stroke-linecap: round
 
   .about-contents
-    @apply flex flex-wrap items-start
-    @apply px-3 my-10
-    @apply md:px-20 md:my-20 mx-auto max-w-[1400px]
+    @apply flex flex-wrap
+    @apply px-3 my-10 items-end
+    @apply md:px-20 md:my-20 mx-auto max-w-[1400px] md:items-start
 
     .about-picture
       @apply relative w-[40%] overflow-visible
       @apply h-[27vh]
       @apply md:h-[500px] xl:w-[30%]
 
-      .about-picture-img
+      #about-picture-img
         @apply object-cover w-full h-full
         clip-path: polygon(0% 10%, 0% 100%, 100% 90%, 100% 0%)
 
       .about-picture-bg
-        @apply absolute w-full h-full bg-[#7D7D7D] top-[5%] left-[5%] -z-10
+        @apply absolute w-full h-full bg-[#7D7D7D] -z-10
+        @apply top-[10px] left-[10px]
+        @apply md:top-[20px] md:left-[20px]
         clip-path: polygon(0% 10%, 0% 100%, 100% 90%, 100% 0%)
 
-    .about-title-mobile
+    #about-title-mobile
       @apply md:hidden text-center w-[60%] font-mplus font-black text-[1.8rem] mb-10
 
     .about-container
@@ -243,7 +267,7 @@ onMounted(() => {
       @apply max-md:px-3 mt-5 text-sm
       @apply md:w-[60%] md:mt-20 md:pl-12 md:text-base xl:ml-auto
 
-      .about-title-desktop
+      #about-title-desktop
         @apply max-md:hidden flex items-center w-full font-black text-[2.5rem] border-l-[10px] pb-2 mb-10
 
         h2
