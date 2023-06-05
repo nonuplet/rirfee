@@ -2,15 +2,17 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faSquarePen } from '@fortawesome/free-solid-svg-icons'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { useBrowserStore } from '../../ts/stores/BrowserStore'
+import { storeToRefs } from 'pinia'
 
 library.add(faBars, faTwitter, faGithub, faSquarePen)
 
+const browser = useBrowserStore()
+const { width: screenWidth } = storeToRefs(browser)
+
 const isMenuOpen = ref(false)
 
-const isMobile = ref(false)
-const BREAKPOINT_MD = 768 // tailwind "md" size
-const screenWidth = ref(0)
 const changedScreenWidth = ref(false)
 
 const isHeaderVisible = ref(true)
@@ -20,17 +22,13 @@ const scrollBeforeY = ref(0)
 const HEADER_CHANGE_OFFSET = 300
 const HEADER_MIN_Y = 100
 
-const hamburgerToggle = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
-
-const onChangeScreen = () => {
-  const newWidth = document.documentElement.clientWidth
-  if (screenWidth.value === newWidth) return
-  screenWidth.value = newWidth
-  isMobile.value = newWidth < BREAKPOINT_MD
+watch(screenWidth, () => {
   isMenuOpen.value = false
   changedScreenWidth.value = true
+})
+
+const hamburgerToggle = () => {
+  isMenuOpen.value = !isMenuOpen.value
 }
 
 const onMenuSelected = () => {
@@ -71,15 +69,12 @@ const onFirstTransition = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('resize', onChangeScreen)
   window.addEventListener('scroll', onScroll)
-  onChangeScreen()
   scrollBaseY.value = window.scrollY
   scrollBeforeY.value = window.scrollY
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', onChangeScreen)
   window.removeEventListener('scroll', onScroll)
 })
 </script>
@@ -103,7 +98,7 @@ onUnmounted(() => {
       </transition>
       <transition name="right" @after-enter="onFirstTransition" @after-leave="onFirstTransition">
         <div
-          v-show="isHeaderVisible && (isMenuOpen || !isMobile)"
+          v-show="isHeaderVisible && (isMenuOpen || !browser.isMobile)"
           class="right"
           :class="{ inactive: changedScreenWidth }"
         >

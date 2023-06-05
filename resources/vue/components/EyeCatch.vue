@@ -16,12 +16,12 @@ onMounted(() => {
   <section id="eye-catch">
     <img class="eye-catch-img" src="/img/index/eye-catch.png" alt="eye-catch-img" />
     <img id="eye-catch-logo" src="/img/logo/rirfee_logo.svg" alt="logo" />
-    <a id="eye-catch-scroll" href="#about">
-      <div class="scroll-inner">
+    <div id="eye-catch-scroll">
+      <a class="scroll-inner" href="#about">
         <font-awesome-icon class="bottom-arrow" :icon="['fas', 'circle-down']" size="2xl" />
         <span class="scroll-text">Scroll</span>
-      </div>
-    </a>
+      </a>
+    </div>
   </section>
 </template>
 
