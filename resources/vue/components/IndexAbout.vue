@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import anime from 'animejs/lib/anime.es'
-import { onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import { AppearEvent } from '../../ts/utils/AppearEvent'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUnity } from '@fortawesome/free-brands-svg-icons'
+import { faCss3, faHtml5, faLinux, faUnity } from '@fortawesome/free-brands-svg-icons'
 import { Skill, Skills } from '../../ts/entities/Skill'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faUnity)
+library.add(faUnity, faHtml5, faCss3, faLinux)
 
 const appearedBgText = () => {
   const timeline = anime.timeline()
@@ -19,17 +19,91 @@ const appearedBgText = () => {
     delay: function (el, i) {
       return i * 250
     },
-    direction: 'alternate',
+    direction: 'normal',
     loop: false,
   })
 }
 
+const skills = ref(Skills)
+const info = ref({
+  isOpen: false,
+  current: '',
+  skill: {
+    title: '',
+    level: 0,
+    description: '',
+  } as Skill,
+})
+
 const onClickIcon = (skill: Skill) => {
-  skill.isOpen = !skill.isOpen
+  if (info.value.current === skill.title) {
+    info.value.isOpen = false
+    info.value.current = ''
+    closeInfoAnimation()
+  } else {
+    if (!info.value.isOpen) {
+      info.value.isOpen = true
+      info.value.current = skill.title
+      info.value.skill = {
+        title: skill.title,
+        level: skill.level,
+        description: skill.description,
+        faIcon: skill.faIcon ?? undefined,
+        iconSrc: skill.iconSrc ?? undefined,
+        style: skill.style ?? undefined,
+      }
+      nextTick(() => openInfoAnimation())
+    } else {
+      closeInfoAnimation().then(() => {
+        info.value.current = skill.title
+        info.value.skill = {
+          title: skill.title,
+          level: skill.level,
+          description: skill.description,
+          faIcon: skill.faIcon ?? undefined,
+          iconSrc: skill.iconSrc ?? undefined,
+          style: skill.style ?? undefined,
+        }
+        nextTick(() => openInfoAnimation())
+      })
+    }
+  }
 }
 
-const skills = ref(Skills)
-skills.value.forEach((skill) => (skill.isOpen = false))
+const openInfoAnimation = () => {
+  const h = document.getElementById('skill-info-box-inner').offsetHeight + 'px'
+  const gauge = info.value.skill.level * 20 + '%'
+
+  const timeline = anime.timeline()
+  timeline.add({
+    targets: '#skill-info-box',
+    height: [0, h],
+    duration: 1000,
+    easing: 'easeOutBounce',
+    direction: 'normal',
+    loop: false,
+  })
+  timeline.add({
+    targets: '#skill-info-bar-value',
+    easing: 'easeInOutSine',
+    width: [0, gauge],
+    duration: 500,
+    direction: 'normal',
+    loop: false,
+  })
+}
+
+const closeInfoAnimation = async () => {
+  const h = document.getElementById('skill-info-box-inner').offsetHeight + 'px'
+  return anime({
+    targets: '#skill-info-box',
+    height: [h, 0],
+    duration: 200,
+    easing: 'easeInSine',
+    direction: 'normal',
+    loop: false,
+  }).finished
+}
 
 onMounted(() => {
   const bgText = document.getElementById('about-background-text')
@@ -84,16 +158,37 @@ onMounted(() => {
         <div class="about-skills">
           <div class="skills-title">SKILLS</div>
           <div class="skills-box">
-            <div
-              v-for="skill of skills"
-              :key="skill.title"
-              class="skill"
-              :class="{ open: skill.isOpen }"
-              @click="onClickIcon(skill)"
-            >
-              <font-awesome-icon v-if="skill.faIcon !== undefined" :icon="skill.faIcon" class="skill-icon" />
-              <div class="skill-info" :class="{ open: skill.isOpen }">
-                <span class="skill-title">{{ skill.title }}</span>
+            <div class="skill-icons">
+              <div v-for="skill of skills" :key="skill.title" class="skill" @click="onClickIcon(skill)">
+                <font-awesome-icon
+                  v-if="skill.faIcon !== undefined"
+                  :icon="skill.faIcon"
+                  class="skill-icon"
+                  :style="skill.style"
+                />
+                <img v-else class="skill-icon" :src="skill.iconSrc" :alt="skill.title" />
+              </div>
+            </div>
+
+            <div id="skill-info-box" :class="{ open: info.isOpen }">
+              <div id="skill-info-box-inner">
+                <div class="header">
+                  <font-awesome-icon
+                    v-if="info.skill.faIcon !== undefined"
+                    :icon="info.skill.faIcon"
+                    class="icon"
+                    :style="info.skill.style"
+                  />
+                  <img v-else class="icon" :src="info.skill.iconSrc" :alt="info.skill.title" />
+                  <span class="title">{{ info.skill.title }}</span>
+                  <div class="gauge">
+                    <div class="gauge-title">Lv.{{ info.skill.level }}</div>
+                    <div class="bar">
+                      <div id="skill-info-bar-value"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="description">{{ info.skill.description }}</div>
               </div>
             </div>
           </div>
@@ -123,7 +218,7 @@ onMounted(() => {
         stroke-linecap: round
 
   .about-contents
-    @apply flex flex-wrap items-end
+    @apply flex flex-wrap items-start
     @apply px-3 my-10
     @apply md:px-20 md:my-20 mx-auto max-w-[1400px]
 
@@ -145,8 +240,8 @@ onMounted(() => {
 
     .about-container
       @apply font-mplus w-full
-      @apply max-md:px-3 max-md:mt-5 text-sm
-      @apply md:w-[60%] md:pl-12 md:text-base xl:ml-auto
+      @apply max-md:px-3 mt-5 text-sm
+      @apply md:w-[60%] md:mt-20 md:pl-12 md:text-base xl:ml-auto
 
       .about-title-desktop
         @apply max-md:hidden flex items-center w-full font-black text-[2.5rem] border-l-[10px] pb-2 mb-10
@@ -167,19 +262,49 @@ onMounted(() => {
         .skills-box
           @apply border-2 rounded-xl border-gray px-5 py-2
 
-          .skill
-            @apply inline-flex w-[24px] transition-all duration-500 overflow-hidden
-            &.open
-              @apply w-full
+          .skill-icons
+            @apply grid mt-2
+            @apply grid-cols-6 gap-1
+            @apply md:grid-cols-12
 
-            .skill-icon
-              @apply text-[24px] min-w-[24px]
+            .skill
+              @apply inline-block m-auto w-[28px] h-[28px]
 
-            .skill-info
-              @apply w-0 ml-2 transition-all duration-500 bg-gray rounded-md px-2 overflow-hidden
-              &.open
-                @apply w-full
+              .skill-icon
+                @apply text-[28px] w-[28px] h-[28px]
 
-              .skill-title
-                @apply font-inter font-black
+          #skill-info-box
+            @apply mt-3 h-0 bg-gray rounded-xl
+            @apply overflow-hidden
+
+            #skill-info-box-inner
+              @apply w-full p-2
+
+              .header
+                @apply px-2 flex flex-wrap items-center mb-2 pb-2 border-b
+
+                .icon
+                  @apply text-[24px] min-w-[24px] mr-3 w-[24px] h-[24px]
+
+                .title
+                  @apply text-lg font-bold leading-none py-1
+
+                .gauge
+                  @apply inline-flex
+                  @apply max-md:w-full max-md:my-2
+                  @apply md:w-1/4 text-right md:ml-auto
+
+                  .gauge-title
+                    @apply text-sm mr-2
+
+                  .bar
+                    @apply w-full border border-primary overflow-hidden
+
+                    #skill-info-bar-value
+                      @apply bg-primary w-0 h-full
+
+              .description
+                @apply text-sm
+                @apply px-2 py-2
+                @apply md:px-8
 </style>

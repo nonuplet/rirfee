@@ -1,6 +1,6 @@
 /** @type {import("tailwindcss").Config} */
 module.exports = {
-  content: ['./resources/**/*.blade.php', './resources/**/*.ts'],
+  content: ['./resources/**/*.blade.php', './resources/**/*.ts', './resources/**/*.vue'],
   theme: {
     colors: {
       black: '#000000',
