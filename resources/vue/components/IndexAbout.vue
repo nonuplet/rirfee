@@ -192,7 +192,7 @@ onMounted(() => {
               </div>
             </div>
 
-            <div id="skill-info-box" :class="{ open: info.isOpen }">
+            <div id="skill-info-box" :class="{ open: info.makeisOpen }">
               <div id="skill-info-box-inner">
                 <div class="header">
                   <font-awesome-icon

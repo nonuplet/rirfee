@@ -4,6 +4,7 @@ import EyeCatch from '../components/EyeCatch.vue'
 import IndexAbout from '../components/IndexAbout.vue'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
 import { onMounted, onUnmounted } from 'vue'
+import IndexProducts from '../components/IndexProducts.vue'
 
 const browser = useBrowserStore()
 
@@ -21,6 +22,10 @@ onUnmounted(() => {
     <IndexHeader />
     <EyeCatch />
     <IndexAbout />
+    <IndexProducts />
+    <div class="w-full h-[100vh]">
+      <span>これはテスト 次のセクション</span>
+    </div>
   </div>
 </template>
 
