@@ -87,5 +87,5 @@ onUnmounted(() => {
         display: none
 
       .product
-        @apply min-w-[80vw] min-h-[80vh] bg-gray
+        @apply min-w-[70vw] min-h-[80vh] bg-gray
 </style>
