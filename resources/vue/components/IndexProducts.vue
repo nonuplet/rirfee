@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ScrollMagic from 'scrollmagic'
 //import 'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators'
-import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import anime from 'animejs'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
 import { storeToRefs } from 'pinia'
@@ -52,6 +52,10 @@ const onScrollEvent = (event: ScrollMagic.ProgressEvent) => {
   vBox.value.scrollLeft = event.progress * width.value
 }
 
+const iconSize = computed(() => {
+  return browser.isMobile ? 'lg' : '3x'
+})
+
 onMounted(() => {
   frame.value = document.getElementById('products')
   vBox.value = document.getElementById('product-list')
@@ -69,11 +73,12 @@ onUnmounted(() => {
     <h2 class="title">Products</h2>
     <div id="products-container">
       <div id="product-list">
-        <div
+        <a
           v-for="p of products"
           :key="p.title"
           class="product"
           :style="{ 'background-image': 'url(' + p.image + ')' }"
+          :href="p.link"
         >
           <div class="product-bottom">
             <div class="product-details">
@@ -88,12 +93,12 @@ onUnmounted(() => {
               </p>
             </div>
             <div class="product-widget">
-              <a :href="p.link" class="product-link">
-                <font-awesome-icon :icon="['fas', 'arrow-right']" size="3x" />
-              </a>
+              <div class="product-link">
+                <font-awesome-icon :icon="['fas', 'arrow-right']" :size="iconSize" />
+              </div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -113,6 +118,7 @@ onUnmounted(() => {
       @apply flex gap-8 px-6 overflow-x-scroll
       -ms-overflow-style: none
       scrollbar-width: none
+
       &::-webkit-scrollbar
         display: none
 
@@ -120,11 +126,14 @@ onUnmounted(() => {
         @apply relative min-w-[70vw] min-h-[80vh] bg-gray bg-cover bg-center
 
         .product-bottom
-          @apply absolute bottom-0 w-full h-1/3 flex justify-between
+          @apply absolute bottom-0 w-full flex justify-between
+          @apply h-1/2 md:h-1/3
           background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0))
 
           .product-details
-            @apply pl-[3%] py-[1.5%] w-1/3
+            @apply pl-[3%]
+            @apply w-[87%] pt-3
+            @apply md:w-1/3 md:py-[1.5%]
 
             .product-subtitle
               @apply text-gray text-base font-bold
@@ -137,9 +146,12 @@ onUnmounted(() => {
               @apply py-2 text-sm text-white
 
           .product-widget
-            @apply flex align-bottom text-right p-3
+            @apply flex grow align-bottom text-center pr-1 pb-1
+            @apply md:p-3
 
             .product-link
-              @apply rounded-full p-3 mt-auto drop-shadow-md
+              @apply rounded-full mt-auto drop-shadow-md ml-auto
               @apply bg-white text-primary hover:bg-primary hover:text-white
+              @apply p-1 max-md:w-8 max-md:h-8
+              @apply md:p-3
 </style>

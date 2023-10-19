@@ -9,6 +9,7 @@ import IndexProducts from '../components/IndexProducts.vue'
 const browser = useBrowserStore()
 
 onMounted(() => {
+  browser.onResize()
   window.addEventListener('resize', browser.onResize)
 })
 
