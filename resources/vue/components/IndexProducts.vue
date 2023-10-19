@@ -5,6 +5,11 @@ import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import anime from 'animejs'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
 import { storeToRefs } from 'pinia'
+import { Products } from '../../ts/entities/Product'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+library.add(faArrowRight)
 
 const browser = useBrowserStore()
 const { width: windowWidth } = storeToRefs(browser)
@@ -15,6 +20,8 @@ watch(windowWidth, () => {
 const width = ref(0)
 const controller = ref(new ScrollMagic.Controller())
 const scene = ref(null)
+
+const products = ref(Products)
 
 const frame = ref(null)
 const vBox = ref(null)
@@ -62,8 +69,31 @@ onUnmounted(() => {
     <h2 class="title">Products</h2>
     <div id="products-container">
       <div id="product-list">
-        <div class="product"></div>
-        <div class="product"></div>
+        <div
+          v-for="p of products"
+          :key="p.title"
+          class="product"
+          :style="{ 'background-image': 'url(' + p.image + ')' }"
+        >
+          <div class="product-bottom">
+            <div class="product-details">
+              <p class="product-subtitle">
+                {{ p.subtitle }}
+              </p>
+              <h3 class="product-title">
+                {{ p.title }}
+              </h3>
+              <p class="product-description">
+                {{ p.description }}
+              </p>
+            </div>
+            <div class="product-widget">
+              <a :href="p.link" class="product-link">
+                <font-awesome-icon :icon="['fas', 'arrow-right']" size="3x" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -87,5 +117,29 @@ onUnmounted(() => {
         display: none
 
       .product
-        @apply min-w-[70vw] min-h-[80vh] bg-gray
+        @apply relative min-w-[70vw] min-h-[80vh] bg-gray bg-cover bg-center
+
+        .product-bottom
+          @apply absolute bottom-0 w-full h-1/3 flex justify-between
+          background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0))
+
+          .product-details
+            @apply pl-[3%] py-[1.5%] w-1/3
+
+            .product-subtitle
+              @apply text-gray text-base font-bold
+
+            .product-title
+              @apply text-white text-4xl font-black font-inter
+              @apply border-b border-gray border-dashed
+
+            .product-description
+              @apply py-2 text-sm text-white
+
+          .product-widget
+            @apply flex align-bottom text-right p-3
+
+            .product-link
+              @apply rounded-full p-3 mt-auto drop-shadow-md
+              @apply bg-white text-primary hover:bg-primary hover:text-white
 </style>
