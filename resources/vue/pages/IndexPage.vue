@@ -5,8 +5,8 @@ import IndexAbout from '../components/IndexAbout.vue'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
 import { onBeforeMount, onMounted, onUnmounted } from 'vue'
 import IndexProducts from '../components/IndexProducts.vue'
-import IndexPosts from '../components/IndexPosts.vue'
 import { useBlogStore, PostProp } from '../../ts/stores/BlogStore'
+import IndexRecent from '../components/IndexRecent.vue'
 
 const browser = useBrowserStore()
 const blog = useBlogStore()
@@ -35,7 +35,7 @@ onUnmounted(() => {
     <EyeCatch />
     <IndexAbout />
     <IndexProducts />
-    <IndexPosts />
+    <IndexRecent />
   </div>
 </template>
 

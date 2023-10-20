@@ -14,11 +14,14 @@ class IndexController extends Controller
         $recent = [];
 
         foreach ($posts as $post) {
+            $thumb_raw = file_get_contents($post["_links"]["wp:featuredmedia"][0]["href"]);
+            $thumb_data = json_decode($thumb_raw, true);
+
             $recent[] = [
                 "title" => $post["title"]["rendered"],
                 "url" => $post["link"],
                 "date" => $post["date"],
-                "thumbnail" => $post["_links"]["wp:featuredmedia"][0]["href"]
+                "thumbnail" => $thumb_data["guid"]["rendered"]
             ];
         }
 
