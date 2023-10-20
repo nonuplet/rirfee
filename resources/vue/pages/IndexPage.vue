@@ -3,11 +3,21 @@ import IndexHeader from '../components/IndexHeader.vue'
 import EyeCatch from '../components/EyeCatch.vue'
 import IndexAbout from '../components/IndexAbout.vue'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
-import { onMounted, onUnmounted } from 'vue'
+import { onBeforeMount, onMounted, onUnmounted } from 'vue'
 import IndexProducts from '../components/IndexProducts.vue'
 import IndexPosts from '../components/IndexPosts.vue'
+import { useBlogStore, PostProp } from '../../ts/stores/BlogStore'
 
 const browser = useBrowserStore()
+const blog = useBlogStore()
+
+const props = defineProps<{
+  recent: PostProp[]
+}>()
+
+onBeforeMount(() => {
+  blog.addRecent(props.recent)
+})
 
 onMounted(() => {
   browser.onResize()

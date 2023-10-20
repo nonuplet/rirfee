@@ -1,10 +1,8 @@
 @extends('layout/base')
 
 @section('body')
-    @php(var_dump($recent))
     <div id="app">
-        <index-page />
-
+        <index-page :recent="@js($recent)" />
     </div>
 @endsection
 
