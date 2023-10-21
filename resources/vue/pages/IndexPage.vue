@@ -3,10 +3,21 @@ import IndexHeader from '../components/IndexHeader.vue'
 import EyeCatch from '../components/EyeCatch.vue'
 import IndexAbout from '../components/IndexAbout.vue'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
-import { onMounted, onUnmounted } from 'vue'
+import { onBeforeMount, onMounted, onUnmounted } from 'vue'
 import IndexProducts from '../components/IndexProducts.vue'
+import { useBlogStore, PostProp } from '../../ts/stores/BlogStore'
+import IndexRecent from '../components/IndexRecent.vue'
 
 const browser = useBrowserStore()
+const blog = useBlogStore()
+
+const props = defineProps<{
+  recent: PostProp[]
+}>()
+
+onBeforeMount(() => {
+  blog.addRecent(props.recent)
+})
 
 onMounted(() => {
   browser.onResize()
@@ -24,13 +35,11 @@ onUnmounted(() => {
     <EyeCatch />
     <IndexAbout />
     <IndexProducts />
-    <div class="w-full h-[100vh]">
-      <span>これはテスト 次のセクション</span>
-    </div>
+    <IndexRecent />
   </div>
 </template>
 
 <style scoped lang="sass">
 #index
-  @apply min-h-[3000px]
+  @apply min-h-[3000px] overflow-x-hidden
 </style>

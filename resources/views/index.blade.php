@@ -2,7 +2,7 @@
 
 @section('body')
     <div id="app">
-        <index-page />
+        <index-page :recent="@js($recent)" />
     </div>
 @endsection
 
