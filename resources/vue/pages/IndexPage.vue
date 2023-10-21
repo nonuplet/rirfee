@@ -41,5 +41,5 @@ onUnmounted(() => {
 
 <style scoped lang="sass">
 #index
-  @apply min-h-[3000px]
+  @apply min-h-[3000px] overflow-x-hidden
 </style>

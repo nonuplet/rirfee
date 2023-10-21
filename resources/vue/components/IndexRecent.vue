@@ -5,6 +5,7 @@ import { faCircleChevronLeft, faCircleChevronRight } from '@fortawesome/free-sol
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { computed, ref } from 'vue'
+import anime from 'animejs/lib/anime.es'
 
 library.add(faCircleChevronLeft, faCircleChevronRight)
 
@@ -24,6 +25,11 @@ const nextActive = computed(() => {
 const onButtonClick = (i: number) => {
   const next = current.value + i
   if (next >= 0 && next < blog.recent.length) {
+    anime({
+      targets: '.posts-mobile-container',
+      translateX: [current.value * -75 + 'vw', next * -75 + 'vw'],
+      easing: 'spring(1, 80, 10, 10)',
+    })
     current.value = next
   }
 }
@@ -50,10 +56,10 @@ const getDateString = (date: Date): string => {
 
       <div v-if="browser.isMobile" class="posts-mobile">
         <div class="prev-button" :class="prevActive" @click="onButtonClick(-1)">
-          <font-awesome-icon :icon="['fas', 'circle-chevron-left']" size="2x" />
+          <font-awesome-icon class="button-icon" :icon="['fas', 'circle-chevron-left']" size="2x" />
         </div>
         <div class="next-button" :class="nextActive" @click="onButtonClick(1)">
-          <font-awesome-icon :icon="['fas', 'circle-chevron-right']" size="2x" />
+          <font-awesome-icon class="button-icon" :icon="['fas', 'circle-chevron-right']" size="2x" />
         </div>
         <div class="posts-mobile-container">
           <a v-for="post of blog.recent" :key="post.url" :href="post.url" class="post">
@@ -102,13 +108,13 @@ const getDateString = (date: Date): string => {
       @apply relative
 
       .prev-button, .next-button
-        @apply absolute top-1/2 -translate-y-1/2
+        @apply absolute top-1/2 -translate-y-1/2 z-10 drop-shadow stroke-[0.5rem]
 
         &.active
-          @apply text-primary
+          @apply text-primary stroke-gray
 
         &.inactive
-          @apply text-gray
+          @apply text-gray stroke-white
 
       .prev-button
         @apply left-4
@@ -117,7 +123,7 @@ const getDateString = (date: Date): string => {
         @apply right-4
 
       .posts-mobile-container
-        @apply flex overflow-x-hidden py-10 gap-5
+        @apply flex overflow-x-visible py-10 gap-5
 
         .post:first-of-type
           @apply ml-[15vw]
