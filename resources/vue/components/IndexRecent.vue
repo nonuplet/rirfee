@@ -83,7 +83,7 @@ const getDateString = (date: Date): string => {
 
 <style scoped lang="sass">
 #recent
-  @apply w-full bg-white
+  @apply w-full
   @apply py-10
   @apply md:px-3 md:py-20
   @apply lg:px-10
