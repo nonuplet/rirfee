@@ -7,6 +7,7 @@ import { onBeforeMount, onMounted, onUnmounted } from 'vue'
 import IndexProducts from '../components/IndexProducts.vue'
 import { useBlogStore, PostProp } from '../../ts/stores/BlogStore'
 import IndexRecent from '../components/IndexRecent.vue'
+import IndexLinks from '../components/IndexLinks.vue'
 
 const browser = useBrowserStore()
 const blog = useBlogStore()
@@ -36,10 +37,11 @@ onUnmounted(() => {
     <IndexAbout />
     <IndexProducts />
     <IndexRecent />
+    <IndexLinks />
   </div>
 </template>
 
 <style scoped lang="sass">
 #index
-  @apply min-h-[3000px] overflow-x-hidden
+  @apply overflow-x-hidden
 </style>
