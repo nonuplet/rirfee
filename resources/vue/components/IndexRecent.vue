@@ -134,7 +134,7 @@ const getDateString = (date: Date): string => {
       @apply lg:gap-6 xl:gap-8
 
     .post
-      @apply flex flex-col border border-gray shadow shadow-gray rounded-lg
+      @apply flex flex-col border border-gray shadow shadow-gray rounded-lg bg-white
       @apply max-md:max-w-[70vw] max-md:min-w-[70vw]
 
       .post-image
