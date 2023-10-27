@@ -4,6 +4,7 @@ export class AppearEvent<T extends () => any> {
   observer: IntersectionObserver
   appearCallback: T[]
   disappearCallback: T[]
+  mode: 'forward' | 'backward' | 'both'
 
   constructor(el: HTMLElement) {
     this.el = el
@@ -11,6 +12,7 @@ export class AppearEvent<T extends () => any> {
     this.observer.observe(el)
     this.appearCallback = []
     this.disappearCallback = []
+    this.mode = 'both'
   }
 
   intersect(entry) {
@@ -43,7 +45,12 @@ export class AppearEvent<T extends () => any> {
 
   appeared() {
     for (const callback of this.appearCallback) {
-      callback()
+      const y = this.el.getBoundingClientRect().y
+      if (y > 0 && (this.mode === 'forward' || this.mode === 'both')) {
+        callback()
+      } else if (this.mode === 'backward' || this.mode === 'both') {
+        callback()
+      }
     }
   }
 
