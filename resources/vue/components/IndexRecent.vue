@@ -4,8 +4,9 @@ import { useBlogStore } from '../../ts/stores/BlogStore'
 import { faCircleChevronLeft, faCircleChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import anime from 'animejs/lib/anime.es'
+import { AppearEvent } from '../../ts/utils/AppearEvent'
 
 library.add(faCircleChevronLeft, faCircleChevronRight)
 
@@ -41,10 +42,39 @@ const getDateString = (date: Date): string => {
     day: '2-digit',
   })
 }
+
+const appearAnimation = () => {
+  const timeline = anime.timeline()
+  timeline.add({
+    targets: '.recent-title .title',
+    easing: 'easeInOutSine',
+    borderLeft: ['0 solid', '1rem solid'],
+    duration: 700,
+    delay: 500,
+    direction: 'normal',
+    loop: false,
+  })
+  timeline.add({
+    targets: '.post',
+    translateX: ['-10px', '0'],
+    opacity: [0, 1],
+    duration: 1500,
+    delay: anime.stagger(100),
+    direction: 'normal',
+    loop: false,
+  })
+}
+
+onMounted(() => {
+  const recentEl = document.getElementById('recent')
+  const recentIntersection = new AppearEvent(recentEl)
+  recentIntersection.mode = 'forward'
+  recentIntersection.addAppearEvent(appearAnimation)
+})
 </script>
 
 <template>
-  <section id="recent">
+  <section id="recent" ref="recent">
     <div class="recent-container">
       <div class="recent-title">
         <h2 class="title">
@@ -134,7 +164,7 @@ const getDateString = (date: Date): string => {
       @apply lg:gap-6 xl:gap-8
 
     .post
-      @apply flex flex-col border border-gray shadow shadow-gray rounded-lg
+      @apply flex flex-col border border-gray shadow shadow-gray rounded-lg bg-white
       @apply max-md:max-w-[70vw] max-md:min-w-[70vw]
 
       .post-image
@@ -149,6 +179,7 @@ const getDateString = (date: Date): string => {
       .post-title
         @apply font-bold pt-1
         @apply text-sm leading-tight
+        @apply sm:max-md:text-base sm:max-md:leading-tight
         @apply lg:text-base lg:leading-tight
 
       .post-date

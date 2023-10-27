@@ -3,12 +3,14 @@ import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faPenNib } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
+import { storeToRefs } from 'pinia'
 
 library.add(faTwitter, faGithub, faPenNib)
 
 const browser = useBrowserStore()
+const { width: screenWidth } = storeToRefs(browser)
 
 const titleRef = ref<HTMLElement>()
 
@@ -43,10 +45,13 @@ const linkIconSize = computed(() => {
   return browser.isMobile ? '2x' : '3x'
 })
 
+watch(screenWidth, () => {
+  calcArrow()
+})
+
 onMounted(() => {
   browser.onResize()
   calcArrow()
-  window.addEventListener('resize', calcArrow)
 })
 </script>
 

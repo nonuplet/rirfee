@@ -130,6 +130,7 @@ const closeInfoAnimation = async () => {
 onMounted(() => {
   const bgText = document.getElementById('about-background-text')
   const bgTextIntersection = new AppearEvent(bgText)
+  bgTextIntersection.mode = 'forward'
   bgTextIntersection.addAppearEvent(appearedAnimation)
 })
 </script>
