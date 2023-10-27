@@ -1,12 +1,10 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <footer id="footer">
     <div class="footer-container">
       <div class="footer-left">
-        <img class="footer-logo" src="/img/logo/rirfee_logo.svg" alt="logo"/>
+        <img class="footer-logo" src="/img/logo/rirfee_logo.svg" alt="logo" />
         <p class="footer-copyright">@2023 Nonuplet</p>
       </div>
       <div class="footer-right">
@@ -40,7 +38,7 @@
       .footer-copyright
         @apply font-inter font-black
         @apply text-sm
-        @apply md:text-2xl
+        @apply md:text-xl lg:text-2xl
 
     .footer-right
 
