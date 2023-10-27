@@ -50,6 +50,7 @@ const appearAnimation = () => {
     easing: 'easeInOutSine',
     borderLeft: ['0 solid', '1rem solid'],
     duration: 700,
+    delay: 500,
     direction: 'normal',
     loop: false,
   })
@@ -178,6 +179,7 @@ onMounted(() => {
       .post-title
         @apply font-bold pt-1
         @apply text-sm leading-tight
+        @apply sm:max-md:text-base sm:max-md:leading-tight
         @apply lg:text-base lg:leading-tight
 
       .post-date
