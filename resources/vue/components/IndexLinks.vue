@@ -86,9 +86,15 @@ onMounted(() => {
         </svg>
       </div>
       <div class="links-box">
-        <font-awesome-icon :icon="['fab', 'twitter']" :size="linkIconSize" />
-        <font-awesome-icon :icon="['fab', 'github']" :size="linkIconSize" />
-        <font-awesome-icon :icon="['fas', 'pen-nib']" :size="linkIconSize" />
+        <a href="https://bsky.app/profile/nonuplet.bsky.social">
+          <font-awesome-icon :icon="['fab', 'twitter']" :size="linkIconSize" />
+        </a>
+        <a href="https://github.com/nonuplet">
+          <font-awesome-icon :icon="['fab', 'github']" :size="linkIconSize" />
+        </a>
+        <a href="https://rirfee.com/blog">
+          <font-awesome-icon :icon="['fas', 'pen-nib']" :size="linkIconSize" />
+        </a>
       </div>
     </div>
   </section>

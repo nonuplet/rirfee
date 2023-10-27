@@ -109,7 +109,7 @@ onUnmounted(() => {
           </div>
           <div class="icon-items">
             <!-- TODO: envから読み込む -->
-            <a class="item" href="https://twitter.com/nonuplet_">
+            <a class="item" href="https://bsky.app/profile/nonuplet.bsky.social">
               <font-awesome-icon :icon="['fab', 'twitter']" size="lg" />
             </a>
             <a class="item" href="https://github.com/nonuplet">

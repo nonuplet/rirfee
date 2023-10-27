@@ -174,9 +174,9 @@ onMounted(() => {
           <h2>自己紹介</h2>
         </div>
         <p class="about-description">
-          Nonuplet (ノナ) です。主にプログラマー。<br />
-          Unityを使ったソフトウェア開発や、Webのフロントエンドを中心に開発を行っています。<br />
-          その他のスキルとしては、デザイン系や、DTMやDJなど割と幅広くやってます。
+          ここのえです。プログラミングを主軸に活動しています。<br />
+          Unityを使ったソフトウェア開発や、Webのフロントエンドなどの開発をしてます。たまにゲームのModを作ってます。<br />
+          その他のスキルとしては、デザイン系や、DTMやDJなど割と幅広くやってます。Blenderはじめました。
         </p>
         <div class="about-skills">
           <div class="skills-title">SKILLS</div>
