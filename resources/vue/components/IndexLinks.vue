@@ -103,7 +103,9 @@ onMounted(() => {
 <style scoped lang="sass">
 #links
   @apply py-20
-  @apply md:mx-auto md:max-w-[80%]
+  @apply md:mx-auto md:max-w-[1000px]
+  @apply md:px-3
+  @apply lg:px-10 lg:py-40
 
   .arrow
     @apply grow

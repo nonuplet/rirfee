@@ -137,13 +137,16 @@ onUnmounted(() => {
 
             .product-subtitle
               @apply text-gray text-base font-bold
+              @apply xl:text-lg
 
             .product-title
               @apply text-white text-4xl font-black font-inter
               @apply border-b border-gray border-dashed
+              @apply xl:text-5xl
 
             .product-description
               @apply py-2 text-sm text-white
+              @apply xl:text-lg
 
           .product-widget
             @apply flex grow align-bottom text-center pr-1 pb-1

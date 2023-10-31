@@ -116,7 +116,7 @@ onMounted(() => {
   @apply w-full
   @apply py-10
   @apply md:px-3 md:py-20
-  @apply lg:px-10
+  @apply lg:px-10 lg:py-40
 
   .recent-container
     @apply mx-auto
@@ -161,7 +161,7 @@ onMounted(() => {
     .posts-desktop
       @apply px-2 w-full
       @apply grid grid-cols-3 gap-3
-      @apply lg:gap-6 xl:gap-8
+      @apply lg:gap-6 xl:grid-cols-4 xl:gap-8
 
     .post
       @apply flex flex-col border border-gray shadow shadow-gray rounded-lg bg-white
