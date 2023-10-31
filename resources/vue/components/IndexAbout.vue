@@ -225,7 +225,7 @@ onMounted(() => {
 #about
   @apply relative w-full overflow-x-hidden
   @apply mt-10
-  @apply md:mt-20
+  @apply md:mt-20 xl:py-20
 
   #about-background-text
     @apply absolute top-0 h-fit -z-10
