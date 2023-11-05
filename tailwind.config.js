@@ -10,6 +10,7 @@ module.exports = {
       'dark-gray': '#D9D9D9',
       'on-dark-gray': '#8F8C8C',
       bgcolor: '#EBEBEB',
+      'linkpage-secondary': '#727C88',
     },
     fontFamily: {
       inter: ['Inter', 'sans-serif'],
