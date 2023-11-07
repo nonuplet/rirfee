@@ -5,7 +5,7 @@
     @php
         $head_default = [
             "title" => "Rirfee.com",
-            "desc" => "nonuplet's homepage",
+            "desc" => "ここのえの個人ホームページです。作ったものや開発メモなど上げてます。",
             "ogp_img" => "https://rirfee.com/ogp_img.png"
         ];
     @endphp
