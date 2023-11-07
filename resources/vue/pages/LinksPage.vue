@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import anime from 'animejs/lib/anime.es'
-import { onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
 import { SocialLinks } from '../../ts/entities/SocialLinks'
 
@@ -16,6 +16,9 @@ const sideBarTransition = ref({
 })
 const offset = ref(13)
 const layout: ref<'mobile' | 'portrait' | 'landscape'> = ref('mobile')
+
+const main = ref()
+const background = ref()
 
 const onResize = () => {
   browser.onResize()
@@ -38,6 +41,26 @@ const onResize = () => {
       sub: '-95vw',
     }
   }
+  const timeline = anime.timeline()
+  timeline.add({
+    targets: '.sidebar-black',
+    easing: 'easeInOutCirc',
+    delay: 500,
+    duration: 850,
+    translateX: sideBarTransition.value.main,
+    loop: false,
+  })
+  timeline.add(
+    {
+      targets: '.sidebar-blue',
+      easing: 'easeInOutCirc',
+      duration: 850,
+      translateX: sideBarTransition.value.sub,
+      loop: false,
+    },
+    '-=600'
+  )
+  calcParallax()
 }
 
 const setLetterClass = () => {
@@ -49,36 +72,38 @@ const setLetterClass = () => {
 }
 
 const calcParallax = () => {
-  const bgMoveArea = document.getElementById('main')
-  const bgImage = document.getElementById('background')
+  const mainBounding = main.value.getBoundingClientRect()
+  const bgBounding = background.value.getBoundingClientRect()
 
-  const rect = bgMoveArea.getBoundingClientRect()
   parallaxCenter.value = {
-    x: rect.width / 2 + rect.x,
-    y: rect.height / 2 + rect.y,
+    x: mainBounding.width + mainBounding.x,
+    y: mainBounding.height,
   }
 
-  const bgSize = bgImage.getBoundingClientRect()
   if (layout.value === 'mobile') {
-    bgImage.style.top = '0'
-    bgImage.style.right = '0'
+    background.value.style.top = '0'
+    background.value.style.left = '0'
+    background.value.style.transform = 'translateX(0) translateY(0)'
   } else {
-    bgImage.style.top = `${parallaxCenter.value.x - bgSize.width / 2}px`
-    bgImage.style.left = `${parallaxCenter.value.y - bgSize.height / 2}px`
+    const top = (mainBounding.height - bgBounding.height) / 2
+    const left = (mainBounding.width + mainBounding.x - bgBounding.width) / 2
+    background.value.style.top = top + 'px'
+    background.value.style.left = left + 'px'
   }
+}
 
-  bgMoveArea.addEventListener('mousemove', (e) => {
-    if (layout.value === 'mobile') return
+const onParallaxMove = (e: MouseEvent) => {
+  if (layout.value !== 'mobile') {
     const x = (parallaxCenter.value.x - e.pageX) / offset.value
     const y = (parallaxCenter.value.y - e.pageY) / offset.value
     anime({
-      targets: bgImage,
+      targets: background.value,
       translateX: x,
       translateY: y,
       easing: 'linear',
       duration: 400,
     })
-  })
+  }
 }
 
 const startAnimation = () => {
@@ -122,12 +147,18 @@ const startAnimation = () => {
 }
 
 onMounted(() => {
+  main.value = document.getElementById('main')
+  background.value = document.getElementById('background')
+
   onResize()
   window.addEventListener('resize', onResize)
-
   setLetterClass()
-  calcParallax()
-  startAnimation()
+  nextTick(() => {
+    // onResize()が走った次のフレームにならないと#backgroundのサイズが確定しない
+    calcParallax()
+    startAnimation()
+    main.value.addEventListener('mousemove', onParallaxMove)
+  })
 })
 </script>
 
@@ -155,11 +186,11 @@ onMounted(() => {
 
 <style scoped lang="sass">
 #links-page
-  @apply relative w-[100lvw] h-[100lvh] bg-white overflow-hidden
+  @apply relative w-[100dvw] h-[100dvh] bg-white overflow-hidden
 
   #sidebar
     .sidebar-black
-      @apply absolute top-0 left-0 w-[100lvw] h-[100lvh] bg-black z-20
+      @apply absolute top-0 left-0 w-[100lvw] h-[100dvh] bg-black z-20
 
       .sidebar-container
         @apply ml-auto flex h-full py-5 justify-center
@@ -181,18 +212,18 @@ onMounted(() => {
             @apply text-right
 
     .sidebar-blue
-      @apply absolute top-0 left-0 w-[100lvw] h-[100lvh] bg-linkpage-secondary z-10
+      @apply absolute top-0 left-0 w-[100dvw] h-[100dvh] bg-linkpage-secondary z-10
 
   #background
     background-image: url('/img/links/links-bg.png')
-    @apply absolute  bg-cover
+    @apply absolute bg-cover
 
     &.mobile
-      @apply w-[100dvw] h-[100dvh] top-0 left-0
+      @apply w-[100lvw] h-[100lvh] top-0 left-0
       background-position: 28% 50%
 
     &.portrait, &.landscape
-      @apply bg-center w-[120dvw] h-[120dvh]
+      @apply bg-center w-[120lvw] h-[120lvh]
 
   #main
     @apply absolute h-[100dvh] top-0 right-0
@@ -223,7 +254,7 @@ onMounted(() => {
     .blog
       @apply bottom-5 right-2
       &.mobile
-        @apply bottom-[23vh] right-[8vw] text-[15vw]
+        @apply bottom-[16vh] right-[8vw] text-[15vw]
 
       &.portrait, &.landscape
         @apply text-[8vw]
@@ -242,7 +273,7 @@ onMounted(() => {
 
     .github
       &.mobile
-        @apply top-[55vh] left-[7vw] text-[14vw]
+        @apply bottom-[35vh] left-[7vw] text-[14vw]
 
       &.portrait
         @apply top-[65vh] right-[10vw] text-[8vw]
@@ -258,5 +289,5 @@ onMounted(() => {
         @apply top-[30vh] right-[20vw] text-[6vw]
 
       &.landscape
-        @apply top-[20vh] left-[6vw] text-[5vw]
+        @apply top-[20vh] left-[1vw] text-[5vw]
 </style>
