@@ -18,16 +18,11 @@ export const SocialLinks: SocialLink[] = [
   {
     title: 'Twitter',
     css: 'twitter',
-    href: 'https://bsky.app/profile/nonuplet.bsky.social',
+    href: 'https://twitter.com/99no_exit',
   },
   {
     title: 'Github',
     css: 'github',
-    href: 'https://bsky.app/profile/nonuplet.bsky.social',
-  },
-  {
-    title: 'Threads',
-    css: 'threads',
-    href: 'https://bsky.app/profile/nonuplet.bsky.social',
+    href: 'https://github.com/nonuplet',
   },
 ]
