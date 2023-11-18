@@ -6,19 +6,28 @@ export class AppearEvent<T extends () => any> {
   disappearCallback: T[]
   mode: 'forward' | 'backward' | 'both'
 
-  constructor(el: HTMLElement) {
+  constructor(el: HTMLElement, mode?: 'forward' | 'backward' | 'both') {
     this.el = el
-    this.observer = new IntersectionObserver(this.intersect.bind(this))
+    this.isIntersecting = false
+    this.observer = new IntersectionObserver(this.intersect.bind(this), { threshold: [0, 1] })
     this.observer.observe(el)
     this.appearCallback = []
     this.disappearCallback = []
-    this.mode = 'both'
+    this.mode = mode === undefined ? 'both' : mode
   }
 
-  intersect(entry) {
+  intersect(entry: IntersectionObserverEntry[]) {
+    if (entry[0].isIntersecting === this.isIntersecting) return
     if (entry[0].isIntersecting) {
-      this.appeared()
-    } else this.disappeared()
+      if (
+        this.mode === 'both' ||
+        (this.mode === 'forward' && entry[0].boundingClientRect.y > 0) ||
+        (this.mode === 'backward' && entry[0].boundingClientRect.y <= 0)
+      )
+        this.appeared()
+    } else {
+      this.disappeared()
+    }
     this.isIntersecting = entry[0].isIntersecting
   }
 
@@ -45,12 +54,7 @@ export class AppearEvent<T extends () => any> {
 
   appeared() {
     for (const callback of this.appearCallback) {
-      const y = this.el.getBoundingClientRect().y
-      if (y > 0 && (this.mode === 'forward' || this.mode === 'both')) {
-        callback()
-      } else if (this.mode === 'backward' || this.mode === 'both') {
-        callback()
-      }
+      callback()
     }
   }
 
