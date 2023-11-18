@@ -9,7 +9,7 @@ export class AppearEvent<T extends () => any> {
   constructor(el: HTMLElement, mode?: 'forward' | 'backward' | 'both') {
     this.el = el
     this.isIntersecting = false
-    this.observer = new IntersectionObserver(this.intersect.bind(this), { threshold: [0, 1] })
+    this.observer = new IntersectionObserver(this.intersect.bind(this))
     this.observer.observe(el)
     this.appearCallback = []
     this.disappearCallback = []
