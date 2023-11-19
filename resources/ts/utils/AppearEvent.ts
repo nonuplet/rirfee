@@ -17,7 +17,6 @@ export class AppearEvent<T extends () => any> {
   }
 
   intersect(entry: IntersectionObserverEntry[]) {
-    if (entry[0].isIntersecting === this.isIntersecting) return
     if (entry[0].isIntersecting) {
       if (
         this.mode === 'both' ||
@@ -53,12 +52,14 @@ export class AppearEvent<T extends () => any> {
   }
 
   appeared() {
+    console.log('on')
     for (const callback of this.appearCallback) {
       callback()
     }
   }
 
   disappeared() {
+    console.log('off')
     for (const callback of this.disappearCallback) {
       callback()
     }
