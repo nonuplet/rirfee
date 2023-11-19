@@ -52,14 +52,12 @@ export class AppearEvent<T extends () => any> {
   }
 
   appeared() {
-    console.log('on')
     for (const callback of this.appearCallback) {
       callback()
     }
   }
 
   disappeared() {
-    console.log('off')
     for (const callback of this.disappearCallback) {
       callback()
     }
