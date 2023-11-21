@@ -1,62 +1,15 @@
 <script setup lang="ts">
-import { NewsData, NewsText } from '../../ts/entities/News'
 import { faRss, faCalendar, faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { useBrowserStore } from '../../ts/stores/BrowserStore'
-import { onBeforeMount, onMounted, reactive, ref } from 'vue'
+import { ref } from 'vue'
+import { useNewsStore } from '../../ts/stores/NewsStore'
 
 library.add(faRss, faCalendar, faStar)
 
-const browser = useBrowserStore()
+const news = useNewsStore()
 
-interface Article {
-  type: string
-  icon: string[]
-  y: string
-  md: string
-  texts: NewsText[]
-}
-
-const articles: Article[] = reactive([])
-
-const buildArticles = () => {
-  for (const news of NewsData) {
-    let type: string
-    let icon: string[]
-
-    if (news.type === 'notice') {
-      type = 'お知らせ'
-      icon = ['fas', 'rss']
-    } else if (news.type === 'event') {
-      type = 'イベント'
-      icon = ['fas', 'calendar']
-    } else if (news.type === 'release') {
-      type = 'リリース'
-      icon = ['fas', 'star']
-    }
-
-    const date = news.date
-      .toLocaleDateString('ja-JP', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      })
-      .split('/')
-
-    articles.push({
-      type,
-      icon,
-      y: date[0],
-      md: `${date[1]}.${date[2]}`,
-      texts: news.texts,
-    })
-  }
-}
-
-onBeforeMount(() => {
-  buildArticles()
-})
+const articles = ref(news.getNews)
 </script>
 
 <template>
@@ -70,11 +23,11 @@ onBeforeMount(() => {
             <font-awesome-icon :icon="article.icon" size="xl" />
           </div>
           <div class="date">
-            <div class="y">{{ article.y }}.</div>
-            <div class="md">{{ article.md }}</div>
+            <div class="y">{{ article.date_texts.year }}.</div>
+            <div class="md">{{ article.date_texts.month_day }}</div>
           </div>
           <div class="text">
-            <template v-for="text in article.texts" :key="text">
+            <template v-for="text in article.contents" :key="text">
               <a v-if="text.link !== undefined" :href="text.link" :class="text.utils">{{ text.text }}</a>
               <span v-else :class="text.utils">{{ text.text }}</span>
               <br v-if="text.line" />
@@ -88,28 +41,40 @@ onBeforeMount(() => {
 
 <style scoped lang="sass">
 #news
-  @apply w-full py-20
+  @apply w-full
+  @apply py-8
+  @apply md:py-20
 
   .news-container
-    @apply w-full max-w-[1200px] mx-auto
+    @apply w-full px-2 max-w-[1200px] mx-auto
 
     .title
       @apply font-inter font-black text-4xl
 
     .news-contents
-      @apply border-t border-r border-primary pt-8
+      @apply border-t border-r border-primary
+      @apply pt-6 pb-3
 
       .article
-        @apply flex w-full px-20 items-center gap-8 mb-8
+        @apply flex w-full items-center mb-8
+        @apply px-2 max-md:flex-wrap gap-2
+        @apply md:px-20 md:gap-8
 
         .badge
           @apply flex items-center w-fit bg-primary text-white p-3
+          @apply max-md:py-1.5
 
           span
-            @apply text-lg font-bold mr-5
+            @apply font-bold
+            @apply text-base mr-3
+            @apply md:text-lg md:mr-5
 
         .date
           @apply font-inter font-bold
+          @apply max-md:ml-2
+
+          .y, .md
+            @apply max-md:inline-block max-md:text-xl
 
           .y
             @apply md:text-base md:leading-none
@@ -118,6 +83,7 @@ onBeforeMount(() => {
             @apply md:text-3xl md:leading-none
 
         .text
+          @apply px-1
           a
             @apply font-bold text-link
 </style>
