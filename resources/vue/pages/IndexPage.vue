@@ -2,13 +2,14 @@
 import IndexHeader from '../components/IndexHeader.vue'
 import EyeCatch from '../components/EyeCatch.vue'
 import IndexAbout from '../components/IndexAbout.vue'
-import {useBrowserStore} from '../../ts/stores/BrowserStore'
-import {onBeforeMount, onMounted, onUnmounted} from 'vue'
+import { useBrowserStore } from '../../ts/stores/BrowserStore'
+import { onBeforeMount, onMounted, onUnmounted } from 'vue'
 import IndexProducts from '../components/IndexProducts.vue'
-import {useBlogStore, PostProp} from '../../ts/stores/BlogStore'
+import { useBlogStore, PostProp } from '../../ts/stores/BlogStore'
 import IndexRecent from '../components/IndexRecent.vue'
 import IndexLinks from '../components/IndexLinks.vue'
-import IndexFooter from "../components/IndexFooter.vue";
+import IndexFooter from '../components/IndexFooter.vue'
+import IndexNews from '../components/IndexNews.vue'
 
 const browser = useBrowserStore()
 const blog = useBlogStore()
@@ -33,13 +34,14 @@ onUnmounted(() => {
 
 <template>
   <div id="index">
-    <IndexHeader/>
-    <EyeCatch/>
-    <IndexAbout/>
-    <IndexProducts/>
-    <IndexRecent/>
-    <IndexLinks/>
-    <IndexFooter/>
+    <IndexHeader />
+    <EyeCatch />
+    <IndexAbout />
+    <IndexProducts />
+    <IndexNews />
+    <IndexRecent />
+    <IndexLinks />
+    <IndexFooter />
   </div>
 </template>
 
