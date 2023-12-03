@@ -254,7 +254,7 @@ onMounted(() => {
     .blog
       @apply bottom-5 right-2
       &.mobile
-        @apply bottom-[16vh] right-[8vw] text-[15vw]
+        @apply bottom-[16vh] right-[5vw] text-[15vw]
 
       &.portrait, &.landscape
         @apply text-[8vw]
@@ -281,13 +281,23 @@ onMounted(() => {
       &.landscape
         @apply top-[40vh] right-[18vw] text-[6vw]
 
-    .threads
+    .zenn
       &.mobile
-        @apply top-[12vh] left-[10vw] text-[7vw]
+        @apply bottom-[18vh] left-[7vw] text-[10vw]
 
       &.portrait
-        @apply top-[30vh] right-[20vw] text-[6vw]
+        @apply top-[55vh] right-[30vw] text-[6vw]
 
       &.landscape
-        @apply top-[20vh] left-[1vw] text-[5vw]
+        @apply bottom-[30vh] left-[16vw] text-[6vw]
+
+    .qiita
+      &.mobile
+        @apply bottom-[30vh] right-[5vw] text-[7vw]
+
+      &.portrait
+        @apply top-[48vh] right-[20vw] text-[5vw]
+
+      &.landscape
+        @apply bottom-[44vh] left-[5vw] text-[4vw]
 </style>

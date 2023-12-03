@@ -26,6 +26,11 @@ const articles = ref(news.getNews)
             <div class="y">{{ article.date_texts.year }}.</div>
             <div class="md">{{ article.date_texts.month_day }}</div>
           </div>
+          <div class="divider">
+            <svg viewBox="0 0 10 50">
+              <line x1="10" y1="0" x2="0" y2="50" />
+            </svg>
+          </div>
           <div class="text">
             <template v-for="text in article.contents" :key="text">
               <a v-if="text.link !== undefined" :href="text.link" :class="text.utils">{{ text.text }}</a>
@@ -61,7 +66,7 @@ const articles = ref(news.getNews)
         @apply md:px-20 md:gap-8
 
         .badge
-          @apply flex items-center w-fit bg-primary text-white p-3
+          @apply flex justify-center items-center w-fit bg-primary text-white p-3 w-[135px]
           @apply max-md:py-1.5
 
           span
@@ -72,6 +77,7 @@ const articles = ref(news.getNews)
         .date
           @apply font-inter font-bold
           @apply max-md:ml-2
+          @apply md:w-[90px]
 
           .y, .md
             @apply max-md:inline-block max-md:text-xl
@@ -81,6 +87,10 @@ const articles = ref(news.getNews)
 
           .md
             @apply md:text-3xl md:leading-none
+
+        .divider
+          svg
+            @apply w-[10px] stroke-primary stroke-1 max-md:hidden
 
         .text
           @apply px-1

@@ -25,4 +25,14 @@ export const SocialLinks: SocialLink[] = [
     css: 'github',
     href: 'https://github.com/nonuplet',
   },
+  {
+    title: 'Zenn',
+    css: 'zenn',
+    href: 'https://zenn.dev/99no_exit',
+  },
+  {
+    title: 'Qiita',
+    css: 'qiita',
+    href: 'https://qiita.com/99no_exit',
+  },
 ]
