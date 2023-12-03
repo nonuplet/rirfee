@@ -50,7 +50,6 @@ const appearAnimation = () => {
     easing: 'easeInOutSine',
     borderLeft: ['0 solid', '1rem solid'],
     duration: 700,
-    delay: 500,
     direction: 'normal',
     loop: false,
   })
@@ -108,6 +107,17 @@ onMounted(() => {
         </a>
       </div>
     </div>
+    <div class="other-links">
+      <h3 class="other-links-title">Others:</h3>
+      <div class="other-links-container">
+        <a href="https://qiita.com/99no_exit">
+          <img class="qiita-logo" src="/img/index/brands/qiita-logo.png" alt="qiita" />
+        </a>
+        <a href="https://zenn.dev/99no_exit">
+          <img class="zenn-logo" src="/img/index/brands/zenn-logo.png" alt="zenn" />
+        </a>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -116,7 +126,7 @@ onMounted(() => {
   @apply w-full
   @apply py-10
   @apply md:px-3 md:py-20
-  @apply lg:px-10 lg:py-40
+  @apply lg:px-10
 
   .recent-container
     @apply mx-auto
@@ -186,4 +196,16 @@ onMounted(() => {
         @apply mt-auto text-gray text-right font-bold
         @apply text-xs
         @apply lg:text-sm
+
+  .other-links
+    @apply w-full max-w-[800px] mx-auto mt-20
+
+    .other-links-title
+      @apply font-black font-inter text-3xl border-b
+
+    .other-links-container
+      @apply flex justify-center items-center w-full py-5 gap-16
+
+      .qiita-logo, .zenn-logo
+        @apply max-w-[200px]
 </style>
