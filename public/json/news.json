@@ -1,0 +1,59 @@
+[
+  {
+    "type": "event",
+    "date": "2023/12/01",
+    "contents": [
+      {
+        "text": "QiitaでAdvent Calendar 2023に参加しています。",
+        "line": true
+      },
+      {
+        "text": "カレンダーは "
+      },
+      {
+        "text": "こちら",
+        "link": "https://qiita.com/advent-calendar/2023/99no_exit"
+      },
+      {
+        "text": " 。"
+      }
+    ]
+  },
+  {
+    "type": "release",
+    "date": "2023/11/20",
+    "contents": [
+      {
+        "text": "streameme",
+        "link": "https://github.com/nonuplet/streameme"
+      },
+      {
+        "text": " v0.1.0　公開中です。",
+        "line": true
+      },
+      {
+        "text": "一時的にメンテナンス状態になっていますが、近日中に開発再開予定です。"
+      }
+    ]
+  },
+  {
+    "type": "notice",
+    "date": "2023/11/21",
+    "contents": [
+      {
+        "text": "rirfee.comをリニューアルしました。",
+        "line": true
+      },
+      {
+        "text": "バグ等を発見した場合は "
+      },
+      {
+        "text": "@99no_exit",
+        "link": "https://twitter.com/99no_exit"
+      },
+      {
+        "text": " までご連絡お願いします。"
+      }
+    ]
+  }
+]

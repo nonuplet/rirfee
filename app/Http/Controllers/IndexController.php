@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $raw = file_get_contents("https://rirfee.com/blog/wp-json/wp/v2/posts?per_page=6");
         $converted = mb_convert_encoding($raw, 'UTF8', 'UTF-8');
         $posts = json_decode($converted, true);
@@ -25,6 +26,9 @@ class IndexController extends Controller
             ];
         }
 
-        return view("index", ["recent" => $recent]);
+        return view("index", [
+            "recent" => $recent,
+            "news" => json_decode(file_get_contents(public_path("json/news.json"), true))
+        ]);
     }
 }
