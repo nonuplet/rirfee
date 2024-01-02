@@ -14,7 +14,7 @@ onMounted(() => {
 
 <template>
   <section id="eye-catch">
-    <img class="eye-catch-img" src="/img/index/eye-catch.png" alt="eye-catch-img" />
+    <img class="eye-catch-img" src="/img/index/eye-catch-202401.png" alt="eye-catch-img" />
     <img id="eye-catch-logo" src="/img/logo/rirfee_logo.svg" alt="logo" />
     <div id="eye-catch-scroll">
       <a class="scroll-inner" href="#about">
@@ -31,15 +31,15 @@ onMounted(() => {
 
 .eye-catch-img
   @apply object-cover opacity-60 w-full h-full
-  object-position: 20% 0
+  object-position: 50% 0
 
 #eye-catch-logo
   @apply absolute transition-all ease-in-out duration-[3s] opacity-0
-  @apply w-[clamp(1rem,60%,20rem)] top-[20%] max-md:left-[50%] translate-y-32 max-md:-translate-x-1/2
-  @apply md:w-[30%] md:top-[50%] md:right-[10%] md:-rotate-6
+  @apply w-[clamp(1rem,60%,20rem)] bottom-[30%] max-lg:left-[50%] translate-y-32 max-lg:-translate-x-1/2
+  @apply lg:w-[30%] lg:top-[50%] lg:left-[10%] lg:rotate-6
 
   &.animate
-    @apply translate-y-0 opacity-100 md:rotate-6
+    @apply translate-y-0 opacity-100 lg:-rotate-6
 
 #eye-catch-scroll
   @apply absolute block w-full h-fit bottom-4
