@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faSquarePen } from '@fortawesome/free-solid-svg-icons'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
 import { storeToRefs } from 'pinia'
 
-library.add(faBars, faTwitter, faGithub, faSquarePen)
+library.add(faBars, faGithub, faSquarePen)
 
 const browser = useBrowserStore()
 const { width: screenWidth } = storeToRefs(browser)
@@ -109,8 +109,8 @@ onUnmounted(() => {
           </div>
           <div class="icon-items">
             <!-- TODO: envから読み込む -->
-            <a class="item" href="https://bsky.app/profile/nonuplet.bsky.social">
-              <font-awesome-icon :icon="['fab', 'twitter']" size="lg" />
+            <a class="item" href="https://bsky.app/profile/rirfee.com">
+              <img class="bsky-logo" src="img/index/brands/bsky.svg" alt="Bluesky Logo" />
             </a>
             <a class="item" href="https://github.com/nonuplet">
               <font-awesome-icon :icon="['fab', 'github']" size="lg" />
@@ -186,6 +186,9 @@ onUnmounted(() => {
         .item
           @apply max-md:w-full max-md:py-2
           @apply md:mr-6
+
+          .bsky-logo
+            @apply inline w-[30px] h-[30px]
 
         &:last-of-type
           @apply md:mr-0
