@@ -36,6 +36,7 @@ onMounted(() => {
 #eye-catch-logo
   @apply absolute transition-all ease-in-out duration-[3s] opacity-0
   @apply w-[clamp(1rem,60%,20rem)] bottom-[30%] max-lg:left-[50%] translate-y-32 max-lg:-translate-x-1/2
+  @apply md:w-[60%] md:bottom-[25%]
   @apply lg:w-[30%] lg:top-[50%] lg:left-[10%] lg:rotate-6
 
   &.animate
@@ -48,7 +49,7 @@ onMounted(() => {
   .scroll-inner
     @apply flex items-center bg-primary rounded-full bg-clip-border drop-shadow-md animate-bounce w-[min(50%,250px)] mx-auto
     @apply px-2 py-2
-    @apply md:px-10
+    @apply md:max-lg:px-10 md:max-lg:py-3 md:max-lg:w-[45%]
 
     .bottom-arrow
       @apply text-white
@@ -56,5 +57,6 @@ onMounted(() => {
     .scroll-text
       @apply block grow text-center text-white font-inter font-black
       @apply text-xl
-      @apply md:text-2xl
+      @apply md:text-4xl
+      @apply lg:text-3xl
 </style>
