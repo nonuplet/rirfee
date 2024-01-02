@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faPenNib } from '@fortawesome/free-solid-svg-icons'
+import { faXTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faSquarePen } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
 import { storeToRefs } from 'pinia'
 
-library.add(faTwitter, faGithub, faPenNib)
+library.add(faXTwitter, faGithub, faSquarePen)
 
 const browser = useBrowserStore()
 const { width: screenWidth } = storeToRefs(browser)
@@ -86,14 +86,17 @@ onMounted(() => {
         </svg>
       </div>
       <div class="links-box">
-        <a href="https://bsky.app/profile/nonuplet.bsky.social">
-          <font-awesome-icon :icon="['fab', 'twitter']" :size="linkIconSize" />
+        <a href="https://bsky.app/profile/rirfee.com">
+          <img class="bsky-logo" src="img/index/brands/bsky.svg" alt="Bluesky Logo" />
+        </a>
+        <a href="https://github.com/99no_exit">
+          <font-awesome-icon :icon="['fab', 'x-twitter']" :size="linkIconSize" />
         </a>
         <a href="https://github.com/nonuplet">
           <font-awesome-icon :icon="['fab', 'github']" :size="linkIconSize" />
         </a>
         <a href="https://rirfee.com/blog">
-          <font-awesome-icon :icon="['fas', 'pen-nib']" :size="linkIconSize" />
+          <font-awesome-icon :icon="['fas', 'square-pen']" :size="linkIconSize" />
         </a>
       </div>
     </div>
@@ -130,4 +133,9 @@ onMounted(() => {
 
     .links-box
       @apply grow max-w-[80%] mx-auto flex justify-center rounded-2xl bg-white shadow-inner shadow-gray py-4 px-4 text-center gap-8
+
+      .bsky-logo
+        @apply inline
+        @apply w-[32px] h-[32px]
+        @apply md:w-[48px] md:h-[48px]
 </style>
