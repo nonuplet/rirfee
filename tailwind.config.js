@@ -1,4 +1,4 @@
-/** @type {import("tailwindcss").Config} */
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./resources/**/*.blade.php', './resources/**/*.ts', './resources/**/*.vue'],
   theme: {
@@ -19,5 +19,5 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/container-queries')],
 }
