@@ -138,9 +138,9 @@ onUnmounted(() => {
               @apply xl:text-lg
 
             .product-title
-              @apply text-white text-4xl font-black font-inter
+              @apply text-white text-2xl font-black font-inter
               @apply border-b border-gray border-dashed
-              @apply xl:text-5xl
+              @apply @md:text-5xl
 
             .product-description
               @apply py-2 text-sm text-white
