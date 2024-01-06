@@ -43,7 +43,7 @@ const links = ExternalLinks
   .links-container
     @apply w-full grid grid-cols-1 gap-4 px-2
     @apply md:px-4 md:grid-cols-2
-    @apply lg:gap-12 lg:grid-cols-3
+    @apply lg:gap-12 xl:grid-cols-3
 
     .link
       @apply flex grow w-full border rounded-lg p-3 gap-2 justify-between items-center bg-bgcolor
