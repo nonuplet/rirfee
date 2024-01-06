@@ -114,10 +114,10 @@ onMounted(() => {
           <h3 class="other-links-title">Others:</h3>
           <div class="other-links-container">
             <a href="https://qiita.com/99no_exit">
-              <img class="qiita-logo" src="/img/index/brands/qiita-logo.png" alt="qiita" />
+              <img class="qiita-logo" src="/img/index/brands/qiita.png" alt="qiita" />
             </a>
             <a href="https://zenn.dev/99no_exit">
-              <img class="zenn-logo" src="/img/index/brands/zenn-logo.png" alt="zenn" />
+              <img class="zenn-logo" src="/img/index/brands/zenn.png" alt="zenn" />
             </a>
           </div>
         </div>
