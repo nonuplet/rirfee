@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import ScrollMagic from 'scrollmagic'
-//import 'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators'
-import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
-import anime from 'animejs'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useBrowserStore } from '../../ts/stores/BrowserStore'
 import { storeToRefs } from 'pinia'
 import { Products } from '../../ts/entities/Product'
@@ -23,8 +21,8 @@ const scene = ref(null)
 
 const products = ref(Products)
 
-const frame = ref(null)
-const vBox = ref(null)
+const frame = ref<HTMLElement>(null)
+const vBox = ref<HTMLElement>(null)
 
 const startScrollEvent = () => {
   const offset = frame.value.clientHeight / 2
@@ -115,7 +113,7 @@ onUnmounted(() => {
     @apply w-full overflow-hidden py-2
 
     #product-list
-      @apply flex gap-8 px-6 overflow-x-scroll
+      @apply flex gap-8 px-[15vw] overflow-x-scroll
       -ms-overflow-style: none
       scrollbar-width: none
 
@@ -123,7 +121,7 @@ onUnmounted(() => {
         display: none
 
       .product
-        @apply relative min-w-[70vw] min-h-[80vh] bg-gray bg-cover bg-center
+        @apply relative min-w-[70vw] min-h-[80vh] bg-gray bg-cover bg-center @container
 
         .product-bottom
           @apply absolute bottom-0 w-full flex justify-between
@@ -131,22 +129,23 @@ onUnmounted(() => {
           background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0))
 
           .product-details
-            @apply pl-[3%]
-            @apply w-[87%] pt-3
-            @apply md:w-1/3 md:py-[1.5%]
+            @apply pl-[2vw]
+            @apply w-full pt-3
+            @apply @md:py-[2vh]
 
             .product-subtitle
               @apply text-gray text-base font-bold
               @apply xl:text-lg
 
             .product-title
-              @apply text-white text-4xl font-black font-inter
+              @apply text-white text-2xl font-black font-inter
               @apply border-b border-gray border-dashed
-              @apply xl:text-5xl
+              @apply @md:text-5xl
 
             .product-description
               @apply py-2 text-sm text-white
-              @apply xl:text-lg
+              @apply @lg:text-lg
+              @apply @xl:text-base
 
           .product-widget
             @apply flex grow align-bottom text-center pr-1 pb-1

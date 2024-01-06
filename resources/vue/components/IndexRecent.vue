@@ -83,39 +83,44 @@ onMounted(() => {
         </h2>
       </div>
 
-      <div v-if="browser.isMobile" class="posts-mobile">
-        <div class="prev-button" :class="prevActive" @click="onButtonClick(-1)">
-          <font-awesome-icon class="button-icon" :icon="['fas', 'circle-chevron-left']" size="2x" />
+      <div class="posts-container">
+        <div v-if="browser.isMobile" class="posts-mobile">
+          <div class="prev-button" :class="prevActive" @click="onButtonClick(-1)">
+            <font-awesome-icon class="button-icon" :icon="['fas', 'circle-chevron-left']" size="2x" />
+          </div>
+          <div class="next-button" :class="nextActive" @click="onButtonClick(1)">
+            <font-awesome-icon class="button-icon" :icon="['fas', 'circle-chevron-right']" size="2x" />
+          </div>
+          <div class="posts-mobile-container">
+            <a v-for="post of blog.recent" :key="post.url" :href="post.url" class="post">
+              <img class="post-image" :src="post.thumbnail" :alt="post.title" />
+              <p class="post-title">{{ post.title }}</p>
+              <p class="post-date">{{ getDateString(post.date) }}</p>
+            </a>
+          </div>
         </div>
-        <div class="next-button" :class="nextActive" @click="onButtonClick(1)">
-          <font-awesome-icon class="button-icon" :icon="['fas', 'circle-chevron-right']" size="2x" />
-        </div>
-        <div class="posts-mobile-container">
-          <a v-for="post of blog.recent" :key="post.url" :href="post.url" class="post">
-            <img class="post-image" :src="post.thumbnail" :alt="post.title" />
-            <p class="post-title">{{ post.title }}</p>
-            <p class="post-date">{{ getDateString(post.date) }}</p>
-          </a>
-        </div>
-      </div>
 
-      <div v-if="!browser.isMobile" class="posts-desktop">
-        <a v-for="post of blog.recent" :key="post.url" :href="post.url" class="post">
-          <img class="post-image" :src="post.thumbnail" :alt="post.title" />
-          <p class="post-title">{{ post.title }}</p>
-          <p class="post-date">{{ getDateString(post.date) }}</p>
-        </a>
-      </div>
-    </div>
-    <div class="other-links">
-      <h3 class="other-links-title">Others:</h3>
-      <div class="other-links-container">
-        <a href="https://qiita.com/99no_exit">
-          <img class="qiita-logo" src="/img/index/brands/qiita-logo.png" alt="qiita" />
-        </a>
-        <a href="https://zenn.dev/99no_exit">
-          <img class="zenn-logo" src="/img/index/brands/zenn-logo.png" alt="zenn" />
-        </a>
+        <div v-if="!browser.isMobile" class="posts-desktop-container">
+          <div class="posts-desktop">
+            <a v-for="post of blog.recent" :key="post.url" :href="post.url" class="post">
+              <img class="post-image" :src="post.thumbnail" :alt="post.title" />
+              <p class="post-title">{{ post.title }}</p>
+              <p class="post-date">{{ getDateString(post.date) }}</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="other-links">
+          <h3 class="other-links-title">Others:</h3>
+          <div class="other-links-container">
+            <a href="https://qiita.com/99no_exit">
+              <img class="qiita-logo" src="/img/index/brands/qiita.png" alt="qiita" />
+            </a>
+            <a href="https://zenn.dev/99no_exit">
+              <img class="zenn-logo" src="/img/index/brands/zenn.png" alt="zenn" />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -123,9 +128,9 @@ onMounted(() => {
 
 <style scoped lang="sass">
 #recent
-  @apply w-full
+  @apply w-full max-w-[1600px] mx-auto
   @apply py-10
-  @apply md:px-3 md:py-20
+  @apply md:px-3 md:py-10
   @apply lg:px-10
 
   .recent-container
@@ -135,8 +140,8 @@ onMounted(() => {
     @apply xl:w-[90%]
 
     .recent-title
-      @apply flex items-center
-      @apply lg:w-1/3
+      @apply flex items-start
+      @apply md:mt-20
 
       .title
         @apply font-inter
@@ -168,10 +173,15 @@ onMounted(() => {
         .post:first-of-type
           @apply ml-[15vw]
 
-    .posts-desktop
-      @apply px-2 w-full
-      @apply grid grid-cols-3 gap-3
-      @apply lg:gap-6 xl:grid-cols-4 xl:gap-8
+    .posts-container
+      @apply w-full @container
+
+    .posts-desktop-container
+      @apply px-2
+
+      .posts-desktop
+        @apply grid grid-cols-2 gap-3
+        @apply @xl:grid-cols-3
 
     .post
       @apply flex flex-col border border-gray shadow shadow-gray rounded-lg bg-white
@@ -198,14 +208,17 @@ onMounted(() => {
         @apply lg:text-sm
 
   .other-links
-    @apply w-full max-w-[800px] mx-auto mt-20
+    @apply w-full max-w-[800px] mx-auto mt-5 px-2
+    @apply @md:mt-20
 
     .other-links-title
-      @apply font-black font-inter text-3xl border-b
+      @apply font-black font-inter text-3xl border-b border-dashed
 
     .other-links-container
-      @apply flex justify-center items-center w-full py-5 gap-16
+      @apply flex flex-wrap justify-center items-center w-full py-3 gap-6
+      @apply @md:gap-12 @md:py-5
 
       .qiita-logo, .zenn-logo
-        @apply max-w-[200px]
+        @apply max-w-[40vw]
+        @apply @md:max-w-[200px]
 </style>

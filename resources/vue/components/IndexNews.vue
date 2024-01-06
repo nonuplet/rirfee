@@ -51,7 +51,7 @@ const articles = ref(news.getNews)
   @apply md:py-20
 
   .news-container
-    @apply w-full px-2 max-w-[1200px] mx-auto
+    @apply w-full px-2 max-w-[1200px] mx-auto @container
 
     .title
       @apply font-inter font-black text-4xl
@@ -63,10 +63,11 @@ const articles = ref(news.getNews)
       .article
         @apply flex w-full items-center mb-8
         @apply px-2 max-md:flex-wrap gap-2
-        @apply md:px-20 md:gap-8
+        @apply @md:px-3 @md:gap-8
+        @apply @4xl:px-20
 
         .badge
-          @apply flex justify-center items-center w-fit bg-primary text-white p-3 w-[135px]
+          @apply flex justify-center items-center w-fit bg-primary text-white p-3 min-w-[135px] max-w-[135px]
           @apply max-md:py-1.5
 
           span
@@ -77,7 +78,7 @@ const articles = ref(news.getNews)
         .date
           @apply font-inter font-bold
           @apply max-md:ml-2
-          @apply md:w-[90px]
+          @apply @md:min-w-[85px] @md:max-w-[85px]
 
           .y, .md
             @apply max-md:inline-block max-md:text-xl
@@ -93,7 +94,8 @@ const articles = ref(news.getNews)
             @apply w-[10px] stroke-primary stroke-1 max-md:hidden
 
         .text
-          @apply px-1
+          @apply px-1 w-full
+
           a
             @apply font-bold text-link
 </style>

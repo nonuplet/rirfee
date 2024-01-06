@@ -3,11 +3,11 @@ import anime from 'animejs/lib/anime.es'
 import { nextTick, onMounted, ref } from 'vue'
 import { AppearEvent } from '../../ts/utils/AppearEvent'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCss3, faHtml5, faLinux, faUnity } from '@fortawesome/free-brands-svg-icons'
+import { faCss3, faGolang, faHtml5, faJava, faLinux, faUnity } from '@fortawesome/free-brands-svg-icons'
 import { Skill, Skills } from '../../ts/entities/Skill'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faUnity, faHtml5, faCss3, faLinux)
+library.add(faUnity, faHtml5, faCss3, faLinux, faGolang, faJava)
 
 const appearedAnimation = () => {
   const timeline = anime.timeline()
@@ -42,7 +42,7 @@ const appearedAnimation = () => {
       direction: 'normal',
       loop: false,
     },
-    500
+    0
   )
 }
 
@@ -166,20 +166,23 @@ onMounted(() => {
         <div class="about-picture-bg"></div>
       </div>
       <div id="about-title-mobile">
-        <h2>自己紹介</h2>
+        <h2>Who I Am?</h2>
       </div>
       <div class="about-container">
         <div id="about-title-desktop">
-          <h2>自己紹介</h2>
+          <h2>Who I Am?</h2>
         </div>
         <p class="about-description">
-          ここのえです。プログラミングを主軸に活動しています。<br />
-          Unityを使ったソフトウェア開発や、Webのフロントエンドなどの開発をしてます。たまにゲームのModを作ってます。<br />
-          その他のスキルとしては、デザイン系や、DTMやDJなど割と幅広くやってます。Blenderはじめました。
+          ここのえ(Kokonoe)です。<br />
+          Unityを使ったソフトウェア開発、Webのフロントエンドなどを中心に行っています。たまにバックエンドも。<br />
+          その他にデザイン関係や、3Dモデリングなど幅広くやってます。<br />
+          <br />
+          趣味はゲーム, DTM, DJ。一番好きなdistroはArch。
         </p>
         <div class="about-skills">
           <div class="skills-title">SKILLS</div>
           <div class="skills-box">
+            <p class="skill-box-info">plz click/tap.</p>
             <div class="skill-icons">
               <div v-for="skill of skills" :key="skill.title" class="skill" @click="onClickIcon(skill)">
                 <font-awesome-icon
@@ -242,7 +245,8 @@ onMounted(() => {
   .about-contents
     @apply flex flex-wrap
     @apply px-3 my-10 items-end
-    @apply md:px-20 md:my-20 mx-auto max-w-[1400px] md:items-start
+    @apply md:px-5 md:my-[10vh]
+    @apply lg:px-20 lg:my-[12vh] mx-auto max-w-[1400px] md:items-start
 
     .about-picture
       @apply relative w-[40%] overflow-visible
@@ -260,10 +264,10 @@ onMounted(() => {
         clip-path: polygon(0% 10%, 0% 100%, 100% 90%, 100% 0%)
 
     #about-title-mobile
-      @apply md:hidden text-center w-[60%] font-mplus font-black text-[1.8rem] mb-10
+      @apply md:hidden text-center w-[60%] font-mplus font-black text-[1.8rem] mb-14
 
     .about-container
-      @apply font-mplus w-full
+      @apply font-mplus w-full @container
       @apply max-md:px-3 mt-5 text-sm
       @apply md:w-[60%] md:mt-20 md:pl-12 md:text-base xl:ml-auto
 
@@ -274,11 +278,12 @@ onMounted(() => {
           @apply pl-8 leading-none
 
       .about-description
-        @apply md:pl-12 lg:text-lg
+        @apply pt-4
+        @apply @md:pt-0 @md:pl-6 @md:text-lg
 
       .about-skills
         @apply w-full mt-2
-        @apply md:pl-12 md:mt-5
+        @apply @sm:pl-3 @sm:mt-5
 
         .skills-title
           @apply w-full text-right font-inter font-black text-xl text-gray
@@ -286,10 +291,13 @@ onMounted(() => {
         .skills-box
           @apply border-2 rounded-xl border-gray px-5 py-2
 
+          .skill-box-info
+            @apply text-gray font-inter border-b border-dashed
+
           .skill-icons
-            @apply grid mt-2
-            @apply grid-cols-6 gap-1
-            @apply md:grid-cols-12
+            @apply grid mt-4
+            @apply grid-cols-6 gap-2
+            @apply @md:grid-cols-10
 
             .skill
               @apply inline-block m-auto w-[28px] h-[28px]
@@ -314,7 +322,7 @@ onMounted(() => {
                   @apply text-lg font-bold leading-none py-1
 
                 .gauge
-                  @apply inline-flex
+                  @apply inline-flex min-w-[120px]
                   @apply max-md:w-full max-md:my-2
                   @apply md:w-1/4 text-right md:ml-auto
 
