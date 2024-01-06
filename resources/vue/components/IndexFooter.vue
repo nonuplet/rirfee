@@ -5,7 +5,7 @@
     <div class="footer-container">
       <div class="footer-left">
         <img class="footer-logo" src="/img/logo/rirfee_logo.svg" alt="logo" />
-        <p class="footer-copyright">@2023 Nonuplet</p>
+        <p class="footer-copyright">@2023-2024 Kokonoe</p>
       </div>
       <div class="footer-right">
         <p class="footer-link-title">LINKS:</p>
@@ -29,16 +29,16 @@
 
     .footer-left
       @apply text-center
-      @apply md:flex md:items-center md:gap-6
+      @apply xl:flex xl:items-center xl:gap-6
 
       .footer-logo
-        @apply w-32
-        @apply md:w-52
+        @apply w-32 mb-2
+        @apply xl:w-52
 
       .footer-copyright
-        @apply font-inter font-black
-        @apply text-sm
-        @apply md:text-xl lg:text-2xl
+        @apply font-inter font-black text-primary
+        @apply text-xs
+        @apply xl:text-xl xl:text-2xl
 
     .footer-right
 
