@@ -8,6 +8,14 @@ export interface Product {
 
 export const Products: Product[] = [
   {
+    title: 'MagicaPly-Blender',
+    subtitle: 'Blender add-on for Voxel Model',
+    description:
+      'MagicaVoxelから出力した.plyモデルを、自動でいい感じにして使いやすくするアドオン。頂点カラー→テクスチャへのベイク処理や頂点数の削減など自動で行います。',
+    image: 'img/index/products/magicaply.png',
+    link: 'https://github.com/nonuplet/MagicaPly-Blender',
+  },
+  {
     title: 'Streameme',
     subtitle: 'VTuber配信システム',
     description:
