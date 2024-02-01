@@ -78,15 +78,17 @@ const articles = ref(news.getNews)
         .date
           @apply font-inter font-bold
           @apply max-md:ml-2
-          @apply @md:min-w-[85px] @md:max-w-[85px]
+          @apply md:min-w-[85px] md:max-w-[85px]
 
           .y, .md
             @apply max-md:inline-block max-md:text-xl
 
           .y
+            @apply sm:text-2xl
             @apply md:text-base md:leading-none
 
           .md
+            @apply sm:text-2xl
             @apply md:text-3xl md:leading-none
 
         .divider
