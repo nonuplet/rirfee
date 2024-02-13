@@ -16,11 +16,6 @@ export const SocialLinks: SocialLink[] = [
     href: '/blog',
   },
   {
-    title: 'Twitter',
-    css: 'twitter',
-    href: 'https://twitter.com/99no_exit',
-  },
-  {
     title: 'Github',
     css: 'github',
     href: 'https://github.com/nonuplet',
