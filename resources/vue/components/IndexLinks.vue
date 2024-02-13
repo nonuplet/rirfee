@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { faXTwitter, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faSquarePen } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { ExternalLinks } from '../../ts/entities/ExternalLinks'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faXTwitter, faGithub, faSquarePen)
+library.add(faGithub, faSquarePen)
 const links = ExternalLinks
 </script>
 

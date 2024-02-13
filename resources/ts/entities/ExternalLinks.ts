@@ -15,12 +15,6 @@ export const ExternalLinks: ExternalLink[] = [
     imgSrc: '/img/index/brands/bsky_blue.svg',
   },
   {
-    name: 'X (Information)',
-    sns_id: '@99no_exit',
-    href: 'https://twitter.com/99no_exit',
-    faIcon: ['fab', 'x-twitter'],
-  },
-  {
     name: 'Github',
     sns_id: 'nonuplet',
     href: 'https://github.com/nonuplet',
