@@ -58,7 +58,7 @@ const onResize = () => {
       translateX: sideBarTransition.value.sub,
       loop: false,
     },
-    '-=600'
+    '-=600',
   )
   calcParallax()
 }
@@ -124,7 +124,7 @@ const startAnimation = () => {
       translateX: [0, sideBarTransition.value.sub],
       loop: false,
     },
-    '-=600'
+    '-=600',
   )
   timeline.add({
     targets: '.letter',
@@ -142,7 +142,7 @@ const startAnimation = () => {
       delay: anime.stagger(150),
       loop: false,
     },
-    '-=1500'
+    '-=1500',
   )
 }
 
@@ -173,9 +173,9 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div class="sidebar-blue"></div>
+      <div class="sidebar-blue" />
     </div>
-    <div id="background" :class="layout"></div>
+    <div id="background" :class="layout" />
     <main id="main" :class="layout">
       <a v-for="link of links" :key="link.title" :class="['link-text', layout, link.css]" :href="link.href">{{
         link.title
