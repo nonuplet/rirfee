@@ -24,7 +24,9 @@ const articles = ref(news.getNews)
           </div>
           <div class="date">
             <div class="y">{{ article.date_texts.year }}.</div>
-            <div class="md">{{ article.date_texts.month_day }}</div>
+            <div class="md">
+              {{ article.date_texts.month_day }}
+            </div>
           </div>
           <div class="divider">
             <svg viewBox="0 0 10 50">

@@ -29,7 +29,7 @@ const appearedAnimation = () => {
       direction: 'normal',
       loop: false,
     },
-    100
+    100,
   )
   timeline.add(
     {
@@ -42,7 +42,7 @@ const appearedAnimation = () => {
       direction: 'normal',
       loop: false,
     },
-    0
+    0,
   )
 }
 
@@ -163,7 +163,7 @@ onMounted(() => {
     <div class="about-contents">
       <div class="about-picture">
         <img id="about-picture-img" src="img/index/about.png" alt="about-img" />
-        <div class="about-picture-bg"></div>
+        <div class="about-picture-bg" />
       </div>
       <div id="about-title-mobile">
         <h2>Who I Am?</h2>
@@ -209,11 +209,13 @@ onMounted(() => {
                   <div class="gauge">
                     <div class="gauge-title">Lv.{{ info.skill.level }}</div>
                     <div class="bar">
-                      <div id="skill-info-bar-value"></div>
+                      <div id="skill-info-bar-value" />
                     </div>
                   </div>
                 </div>
-                <div class="description">{{ info.skill.description }}</div>
+                <div class="description">
+                  {{ info.skill.description }}
+                </div>
               </div>
             </div>
           </div>
