@@ -29,7 +29,7 @@ class IndexController extends Controller
                 "title" => $post["title"]["rendered"],
                 "url" => $post["link"],
                 "date" => $post["date"],
-                "thumbnail" => $thumb_data["guid"]["rendered"] ?? "",
+                "thumbnail" => $thumb_data["guid"]["rendered"] ?? "img/index/no-image.png"
             ];
         }
 
