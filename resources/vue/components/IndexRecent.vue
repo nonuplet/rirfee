@@ -104,8 +104,10 @@ onMounted(() => {
           <div class="posts-desktop">
             <a v-for="post of blog.recent" :key="post.url" :href="post.url" class="post">
               <img class="post-image" :src="post.thumbnail" :alt="post.title" />
-              <p class="post-title">{{ post.title }}</p>
-              <p class="post-date">{{ getDateString(post.date) }}</p>
+              <div class="post-texts">
+                <p class="post-title">{{ post.title }}</p>
+                <p class="post-date">{{ getDateString(post.date) }}</p>
+              </div>
             </a>
           </div>
         </div>
@@ -188,16 +190,13 @@ onMounted(() => {
       @apply max-md:max-w-[70vw] max-md:min-w-[70vw]
 
       .post-image
-        @apply w-full rounded-t-lg
+        @apply w-full rounded-t-lg h-[70%] object-cover
 
       .post-texts
-        @apply grow px-1.5 py-1
-
-      .post-title, .post-date
-        @apply px-1.5
+        @apply h-[30%] flex flex-col px-1.5 py-1
 
       .post-title
-        @apply font-bold pt-1
+        @apply font-bold pt-1 px-1.5
         @apply text-sm leading-tight
         @apply sm:max-md:text-base sm:max-md:leading-tight
         @apply lg:text-base lg:leading-tight
@@ -205,6 +204,7 @@ onMounted(() => {
       .post-date
         @apply mt-auto text-gray text-right font-bold
         @apply text-xs
+        @apply max-sm:px-1.5
         @apply lg:text-sm
 
   .other-links
