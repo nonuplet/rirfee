@@ -1,51 +1,26 @@
 [
   {
     "type": "event",
-    "date": "2023/12/25",
+    "date": "2024/12/01",
     "contents": [
       {
-        "text": "QiitaでAdvent Calendar 2023完走しました。",
-        "line": true
+        "text": "2024年のAdvent Calendarを順次公開しています。今年はQiitaやZennではなく、"
       },
       {
-        "text": "カレンダーは "
+        "text": "ブログ",
+        "link": "https://rirfee.com/blog"
       },
       {
-        "text": "こちら",
-        "link": "https://qiita.com/advent-calendar/2023/99no_exit"
-      },
-      {
-        "text": " 。"
+        "text": "で投稿しています。良ければ見ていってください。"
       }
     ]
   },
   {
     "type": "notice",
-    "date": "2024/01/01",
+    "date": "2024/12/12",
     "contents": [
       {
-        "text": "あけましておめでとうございます。本年も宜しくお願い申し上げます。",
-        "line": true
-      },
-      {
-        "text": "新年のご挨拶: "
-      },
-      {
-        "text": "[2023年賀]",
-        "link": "https://twitter.com/99no_exit/status/1741478357601329318"
-      }
-    ]
-  },
-  {
-    "type": "notice",
-    "date": "2024/01/06",
-    "contents": [
-      {
-        "text": "ホームページのリニューアルを行いました。",
-        "line": true
-      },
-      {
-        "text": "タブレット向けにレスポンシブを最適化しました。"
+        "text": "不具合により一時ホームページが閲覧不能になっていました。お詫び申し上げます。現在は復旧済みです。"
       }
     ]
   }
