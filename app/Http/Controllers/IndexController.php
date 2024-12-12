@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use function PHPUnit\Framework\isNull;
 
 class IndexController extends Controller
 {
@@ -15,14 +16,20 @@ class IndexController extends Controller
         $recent = [];
 
         foreach ($posts as $post) {
-            $thumb_raw = file_get_contents($post["_links"]["wp:featuredmedia"][0]["href"]);
-            $thumb_data = json_decode($thumb_raw, true);
+            $featured_media = $post["_links"]["wp:featuredmedia"][0]["href"] ?? null;
+
+            $thumb_data = null;
+
+            if ($featured_media) {
+                $thumb_raw = file_get_contents($featured_media);
+                $thumb_data = json_decode($thumb_raw, true);
+            }
 
             $recent[] = [
                 "title" => $post["title"]["rendered"],
                 "url" => $post["link"],
                 "date" => $post["date"],
-                "thumbnail" => $thumb_data["guid"]["rendered"]
+                "thumbnail" => $thumb_data["guid"]["rendered"] ?? "",
             ];
         }
 
