@@ -190,10 +190,10 @@ onMounted(() => {
       @apply max-md:max-w-[70vw] max-md:min-w-[70vw]
 
       .post-image
-        @apply w-full rounded-t-lg h-[75%] object-cover
+        @apply w-full rounded-t-lg h-[70%] object-cover
 
       .post-texts
-        @apply h-[25%] flex flex-col px-1.5 py-1
+        @apply h-[30%] flex flex-col px-1.5 py-1
 
       .post-title
         @apply font-bold pt-1 px-1.5
