@@ -105,7 +105,7 @@ onUnmounted(() => {
           <div class="text-items">
             <a href="#about" class="item" @click="onMenuSelected">About</a>
             <a href="#products" class="item" @click="onMenuSelected">Products</a>
-            <a href="#posts" class="item" @click="onMenuSelected">Posts</a>
+            <a href="#recent" class="item" @click="onMenuSelected">Posts</a>
           </div>
           <div class="icon-items">
             <!-- TODO: envから読み込む -->
